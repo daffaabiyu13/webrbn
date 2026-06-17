@@ -7,8 +7,13 @@
 
 {{-- SECTION 1: HERO --}}
 <section class="relative flex min-h-[90vh] items-center overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-primary-dark via-primary to-[#0d2a0b]"></div>
-    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 20% 30%, #6DBE45 0, transparent 40%), radial-gradient(circle at 80% 70%, #6DBE45 0, transparent 35%);"></div>
+    @if (!empty($heroBackground))
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $heroBackground }}');"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-dark/85 via-primary/75 to-[#0d2a0b]/85"></div>
+    @else
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-dark via-primary to-[#0d2a0b]"></div>
+        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 20% 30%, #6DBE45 0, transparent 40%), radial-gradient(circle at 80% 70%, #6DBE45 0, transparent 35%);"></div>
+    @endif
 
     <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-24 text-center text-white">
         <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium ring-1 ring-white/20 backdrop-blur">

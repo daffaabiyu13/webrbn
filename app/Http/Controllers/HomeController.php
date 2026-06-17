@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Setting;
 
 class HomeController extends Controller
 {
@@ -16,6 +17,11 @@ class HomeController extends Controller
 
         $categories = ProductCategory::withCount('products')->get();
 
-        return view('pages.home', compact('featuredProducts', 'categories'));
+        $heroBackground = Setting::get('hero_background');
+        if ($heroBackground && ! str_starts_with($heroBackground, 'http')) {
+            $heroBackground = asset('storage/' . $heroBackground);
+        }
+
+        return view('pages.home', compact('featuredProducts', 'categories', 'heroBackground'));
     }
 }
