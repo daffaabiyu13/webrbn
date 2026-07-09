@@ -85,17 +85,56 @@
 
     {{-- Side column --}}
     <div class="space-y-5">
-        <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100">
+        @php
+            $currentImage = ($product && $product->image) ? $product->imageUrl() : null;
+            $limit = \App\Support\UploadLimit::forProducts();
+        @endphp
+        <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100"
+             x-data="{
+                preview: null,
+                fileName: '',
+                handle(e) {
+                    const f = e.target.files && e.target.files[0];
+                    if (!f) { this.preview = null; this.fileName = ''; return; }
+                    this.fileName = f.name;
+                    const r = new FileReader();
+                    r.onload = () => this.preview = r.result;
+                    r.readAsDataURL(f);
+                },
+                reset() {
+                    this.preview = null;
+                    this.fileName = '';
+                    this.$refs.file.value = '';
+                }
+             }">
             <h2 class="text-base font-semibold text-gray-800">Gambar Produk</h2>
-            @if ($product && $product->image)
-                <img src="{{ $product->imageUrl() }}" alt="" class="mt-4 w-full rounded-lg ring-1 ring-gray-200">
-                <p class="mt-2 text-xs text-gray-500">Gambar saat ini. Unggah baru untuk mengganti.</p>
-            @else
-                <p class="mt-3 text-xs text-gray-500">Belum ada gambar. Akan menggunakan placeholder otomatis.</p>
+
+            {{-- Preview area --}}
+            <div class="mt-4 overflow-hidden rounded-lg ring-1 ring-gray-200 bg-cream/40">
+                <template x-if="preview">
+                    <img :src="preview" alt="Preview" class="w-full h-48 object-cover">
+                </template>
+                <template x-if="!preview">
+                    @if ($currentImage)
+                        <img src="{{ $currentImage }}" alt="Gambar saat ini" class="w-full h-48 object-cover">
+                    @else
+                        <div class="flex h-48 items-center justify-center text-center text-xs text-gray-400 px-4">
+                            Belum ada gambar. Pilih file di bawah untuk pratinjau.
+                        </div>
+                    @endif
+                </template>
+            </div>
+
+            <p class="mt-2 text-xs text-gray-500" x-show="preview" x-cloak>
+                Pratinjau file baru: <span x-text="fileName" class="font-medium"></span>
+                <button type="button" @click="reset()" class="ml-1 text-primary hover:underline">batal</button>
+            </p>
+            @if ($currentImage)
+                <p class="mt-2 text-xs text-gray-500" x-show="!preview">Gambar saat ini. Unggah baru untuk mengganti.</p>
             @endif
 
-            @php $limit = \App\Support\UploadLimit::forProducts(); @endphp
-            <input type="file" name="image" accept="image/*" class="mt-4 block w-full text-sm text-gray-600 file:mr-3 file:rounded-lg file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-primary-dark">
+            <input type="file" name="image" accept="image/*" x-ref="file" @change="handle($event)"
+                   class="mt-4 block w-full text-sm text-gray-600 file:mr-3 file:rounded-lg file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-primary-dark">
             <p class="mt-1 text-xs text-gray-400">JPG/PNG/WebP. Gambar besar akan otomatis di-resize (max 1600px) &amp; dikompres ke JPEG. Batas upload server: <b>{{ $limit->human() }}</b>.</p>
         </div>
 
