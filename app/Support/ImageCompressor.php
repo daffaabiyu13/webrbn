@@ -27,7 +27,7 @@ class ImageCompressor
 
     public function storeCompressed(UploadedFile $file, string $disk, string $directory): string
     {
-        if (! extension_loaded('gd')) {
+        if (! $this->gdAvailable()) {
             return $file->store($directory, $disk);
         }
 
@@ -66,10 +66,10 @@ class ImageCompressor
     private function readImage(string $path, ?string $mime)
     {
         return match ($mime) {
-            'image/jpeg', 'image/jpg' => @imagecreatefromjpeg($path),
-            'image/png' => $this->readPngFlattened($path),
+            'image/jpeg', 'image/jpg' => function_exists('imagecreatefromjpeg') ? @imagecreatefromjpeg($path) : null,
+            'image/png' => function_exists('imagecreatefrompng') ? $this->readPngFlattened($path) : null,
             'image/webp' => function_exists('imagecreatefromwebp') ? @imagecreatefromwebp($path) : null,
-            'image/gif' => @imagecreatefromgif($path),
+            'image/gif' => function_exists('imagecreatefromgif') ? @imagecreatefromgif($path) : null,
             default => null,
         };
     }
@@ -101,5 +101,30 @@ class ImageCompressor
         $ratio = min($this->maxWidth / $w, $this->maxHeight / $h);
 
         return [(int) round($w * $ratio), (int) round($h * $ratio)];
+    }
+
+    private function gdAvailable(): bool
+    {
+        if (! extension_loaded('gd')) {
+            return false;
+        }
+
+        foreach ([
+            'imagejpeg',
+            'imagecreatetruecolor',
+            'imagecopyresampled',
+            'imagesx',
+            'imagesy',
+            'imagedestroy',
+            'imagecolorallocate',
+            'imagefilledrectangle',
+            'imagecopy',
+        ] as $fn) {
+            if (! function_exists($fn)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
