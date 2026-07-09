@@ -4,27 +4,22 @@ namespace App\Support;
 
 class UploadLimit
 {
-    public function __construct(private int $appCapKb = 4096)
-    {
-    }
-
     public static function forProducts(): self
     {
-        return new self(4096);
+        return new self();
     }
 
     public static function forHeroBackground(): self
     {
-        return new self(6144);
+        return new self();
     }
 
     public function maxKb(): int
     {
         $upload = $this->iniToBytes(ini_get('upload_max_filesize') ?: '2M');
         $post = $this->iniToBytes(ini_get('post_max_size') ?: '8M');
-        $appCap = $this->appCapKb * 1024;
 
-        return (int) floor(min($upload, $post, $appCap) / 1024);
+        return (int) floor(min($upload, $post) / 1024);
     }
 
     public function human(): string
