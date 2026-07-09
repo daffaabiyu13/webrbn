@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Support\ImageCompressor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -41,7 +42,8 @@ class ProductController extends Controller
         $data['features'] = $request->featuresArray();
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('products', 'public');
+            $data['image'] = ImageCompressor::forProducts()
+                ->storeCompressed($request->file('image'), 'public', 'products');
         }
 
         Product::create($data);
@@ -67,7 +69,8 @@ class ProductController extends Controller
             if ($product->image && ! str_starts_with($product->image, 'http')) {
                 Storage::disk('public')->delete($product->image);
             }
-            $data['image'] = $request->file('image')->store('products', 'public');
+            $data['image'] = ImageCompressor::forProducts()
+                ->storeCompressed($request->file('image'), 'public', 'products');
         } else {
             unset($data['image']);
         }

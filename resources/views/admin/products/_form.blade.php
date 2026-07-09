@@ -94,8 +94,9 @@
                 <p class="mt-3 text-xs text-gray-500">Belum ada gambar. Akan menggunakan placeholder otomatis.</p>
             @endif
 
+            @php $limit = \App\Support\UploadLimit::forProducts(); @endphp
             <input type="file" name="image" accept="image/*" class="mt-4 block w-full text-sm text-gray-600 file:mr-3 file:rounded-lg file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-primary-dark">
-            <p class="mt-1 text-xs text-gray-400">JPG/PNG/WebP, maksimal 4MB.</p>
+            <p class="mt-1 text-xs text-gray-400">JPG/PNG/WebP. Gambar besar akan otomatis di-resize (max 1600px) &amp; dikompres ke JPEG. Batas upload server: <b>{{ $limit->human() }}</b>.</p>
         </div>
 
         <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100">

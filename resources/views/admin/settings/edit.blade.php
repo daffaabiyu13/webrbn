@@ -25,10 +25,11 @@
         <form method="POST" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data" class="mt-6 space-y-4">
             @csrf
 
+            @php $limit = \App\Support\UploadLimit::forHeroBackground(); @endphp
             <div>
                 <label class="block text-sm font-medium text-gray-700">Unggah Gambar Baru</label>
                 <input type="file" name="hero_background" accept="image/*" class="mt-2 block w-full text-sm text-gray-600 file:mr-3 file:rounded-lg file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-primary-dark">
-                <p class="mt-1 text-xs text-gray-400">JPG/PNG/WebP, maksimal 6MB. Rekomendasi resolusi minimal 1920x1080.</p>
+                <p class="mt-1 text-xs text-gray-400">JPG/PNG/WebP. Gambar besar akan otomatis di-resize (max 2400x1600) &amp; dikompres ke JPEG. Batas upload server: <b>{{ $limit->human() }}</b> (upload_max_filesize={{ $limit->phpUpload() }}, post_max_size={{ $limit->phpPost() }}).</p>
             </div>
 
             <div class="flex flex-wrap gap-3 pt-2">
