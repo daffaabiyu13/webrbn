@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Setting;
 
 class CatalogController extends Controller
 {
@@ -19,7 +20,9 @@ class CatalogController extends Controller
             ->paginate(9)
             ->withQueryString();
 
-        return view('pages.catalog.index', compact('products', 'categories'));
+        $heroBackground = $this->heroBackground();
+
+        return view('pages.catalog.index', compact('products', 'categories', 'heroBackground'));
     }
 
     public function show($slug)
@@ -32,5 +35,15 @@ class CatalogController extends Controller
             ->get();
 
         return view('pages.catalog.show', compact('product', 'related'));
+    }
+
+    private function heroBackground(): ?string
+    {
+        $path = Setting::get('hero_background_catalog');
+        if ($path && ! str_starts_with($path, 'http')) {
+            return asset('storage/' . $path);
+        }
+
+        return $path;
     }
 }

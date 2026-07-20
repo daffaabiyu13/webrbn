@@ -6,8 +6,14 @@
 @section('content')
 
 {{-- SECTION 1: HERO --}}
-<section class="relative flex min-h-[340px] items-center overflow-hidden bg-gradient-to-br from-primary-dark via-primary to-[#0d2a0b]">
-    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 25% 35%, #6DBE45 0, transparent 40%);"></div>
+<section class="relative flex min-h-[340px] items-center overflow-hidden">
+    @if (!empty($heroBackground))
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $heroBackground }}');"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-dark/85 via-primary/75 to-[#0d2a0b]/85"></div>
+    @else
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-dark via-primary to-[#0d2a0b]"></div>
+        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 25% 35%, #6DBE45 0, transparent 40%);"></div>
+    @endif
     <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-20 text-center text-white">
         <h1 class="text-4xl font-extrabold sm:text-5xl">Tentang PT. Radika Bintang Nusantara</h1>
         <p class="mt-4 text-lg text-secondary">Authorized Supplier &amp; System Integrator Komponen Elektrikal</p>

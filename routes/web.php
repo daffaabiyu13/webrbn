@@ -29,5 +29,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('products', AdminProductController::class)->except(['show']);
     Route::get('/settings', [AdminSettingController::class, 'edit'])->name('settings.edit');
-    Route::post('/settings', [AdminSettingController::class, 'update'])->name('settings.update');
+    Route::post('/settings/hero/{page}', [AdminSettingController::class, 'updateHero'])
+        ->whereIn('page', ['home', 'catalog', 'about'])
+        ->name('settings.hero.update');
 });

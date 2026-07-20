@@ -8,20 +8,40 @@ use App\Support\ImageCompressor;
 use App\Support\UploadLimit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SettingController extends Controller
 {
+    private const HERO_PAGES = [
+        'home' => 'Home',
+        'catalog' => 'Catalog',
+        'about' => 'About',
+    ];
+
     public function edit()
     {
-        $heroBackground = Setting::get('hero_background');
+        $heroes = [];
+        foreach (self::HERO_PAGES as $key => $label) {
+            $heroes[$key] = [
+                'key' => $key,
+                'label' => $label,
+                'value' => Setting::get("hero_background_{$key}"),
+            ];
+        }
 
-        return view('admin.settings.edit', compact('heroBackground'));
+        return view('admin.settings.edit', compact('heroes'));
     }
 
-    public function update(Request $request)
+    public function updateHero(Request $request, string $page)
     {
+        if (! isset(self::HERO_PAGES[$page])) {
+            throw new NotFoundHttpException();
+        }
+
         $limit = UploadLimit::forHeroBackground();
         $human = $limit->human();
+        $settingKey = "hero_background_{$page}";
+        $pageLabel = self::HERO_PAGES[$page];
 
         $request->validate([
             'hero_background' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:' . $limit->maxKb()],
@@ -31,15 +51,15 @@ class SettingController extends Controller
             'hero_background.max' => "Ukuran gambar terlalu besar. Maksimal {$human}.",
         ]);
 
-        $current = Setting::get('hero_background');
+        $current = Setting::get($settingKey);
 
         if ($request->boolean('remove_hero_background')) {
             if ($current && ! str_starts_with($current, 'http')) {
                 Storage::disk('public')->delete($current);
             }
-            Setting::set('hero_background', null);
+            Setting::set($settingKey, null);
 
-            return back()->with('status', 'Hero background dihapus.');
+            return back()->with('status', "Hero background {$pageLabel} dihapus.");
         }
 
         if ($request->hasFile('hero_background')) {
@@ -48,9 +68,9 @@ class SettingController extends Controller
             }
             $path = ImageCompressor::forHeroBackground()
                 ->storeCompressed($request->file('hero_background'), 'public', 'settings');
-            Setting::set('hero_background', $path);
+            Setting::set($settingKey, $path);
 
-            return back()->with('status', 'Hero background berhasil diperbarui (otomatis dikompres).');
+            return back()->with('status', "Hero background {$pageLabel} berhasil diperbarui (otomatis dikompres).");
         }
 
         return back()->with('status', 'Tidak ada perubahan disimpan.');

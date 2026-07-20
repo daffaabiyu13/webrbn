@@ -17,7 +17,7 @@ class HomeController extends Controller
 
         $categories = ProductCategory::withCount('products')->get();
 
-        $heroBackground = Setting::get('hero_background');
+        $heroBackground = Setting::get('hero_background_home');
         if ($heroBackground && ! str_starts_with($heroBackground, 'http')) {
             $heroBackground = asset('storage/' . $heroBackground);
         }
