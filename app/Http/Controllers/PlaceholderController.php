@@ -26,8 +26,8 @@ class PlaceholderController extends Controller
             . '<rect width="600" height="400" fill="url(#g)"/>'
             . '<circle cx="500" cy="80" r="140" fill="#6DBE45" fill-opacity="0.18"/>'
             . '<circle cx="90" cy="340" r="110" fill="#6DBE45" fill-opacity="0.12"/>'
-            . '<text x="300" y="205" font-family="Helvetica,Arial,sans-serif" font-size="46" font-weight="700" fill="#ffffff" text-anchor="middle">' . $label . '</text>'
-            . '<text x="300" y="245" font-family="Helvetica,Arial,sans-serif" font-size="16" font-weight="500" fill="#ffffff" fill-opacity="0.7" letter-spacing="2" text-anchor="middle">PT. RADIKA BINTANG NUSANTARA</text>'
+            . '<text x="300" y="205" font-family="Roboto,Helvetica,Arial,sans-serif" font-size="46" font-weight="700" fill="#ffffff" text-anchor="middle">' . $label . '</text>'
+            . '<text x="300" y="245" font-family="Roboto,Helvetica,Arial,sans-serif" font-size="16" font-weight="500" fill="#ffffff" fill-opacity="0.7" letter-spacing="2" text-anchor="middle">PT. RADIKA BINTANG NUSANTARA</text>'
             . '</svg>';
 
         return response($svg, 200, [

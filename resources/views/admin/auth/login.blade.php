@@ -4,12 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin &mdash; PT. Radika Bintang Nusantara</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: { extend: {
                 colors: { primary: '#2D6A27', 'primary-dark': '#1e4d1b', secondary: '#6DBE45' },
-                fontFamily: { sans: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+                fontFamily: { sans: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
             } },
         };
     </script>
