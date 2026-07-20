@@ -12,7 +12,7 @@ class CatalogController extends Controller
     {
         $categories = ProductCategory::withCount('products')->get();
 
-        $products = Product::with('category')
+        $products = Product::with(['category', 'images'])
             ->when(request('category'), fn ($q, $cat) => $q->where('product_category_id', $cat))
             ->when(request('search'), fn ($q, $s) => $q->where('name', 'like', "%{$s}%"))
             ->orderByDesc('is_featured')
@@ -27,9 +27,10 @@ class CatalogController extends Controller
 
     public function show($slug)
     {
-        $product = Product::with('category')->where('slug', $slug)->firstOrFail();
+        $product = Product::with(['category', 'images'])->where('slug', $slug)->firstOrFail();
 
-        $related = Product::where('product_category_id', $product->product_category_id)
+        $related = Product::with('images')
+            ->where('product_category_id', $product->product_category_id)
             ->where('id', '!=', $product->id)
             ->take(3)
             ->get();

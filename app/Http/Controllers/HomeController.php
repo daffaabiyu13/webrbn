@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         $featuredProducts = Product::where('is_featured', true)
-            ->with('category')
+            ->with(['category', 'images'])
             ->take(6)
             ->get();
 

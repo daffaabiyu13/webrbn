@@ -23,7 +23,10 @@ class ProductRequest extends FormRequest
             'slug' => ['nullable', 'string', 'max:255', Rule::unique('products', 'slug')->ignore($productId)],
             'short_description' => ['required', 'string', 'max:500'],
             'full_description' => ['required', 'string'],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:' . UploadLimit::forProducts()->maxKb()],
+            'images' => ['nullable', 'array'],
+            'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:' . UploadLimit::forProducts()->maxKb()],
+            'delete_images' => ['nullable', 'array'],
+            'delete_images.*' => ['integer'],
             'specifications' => ['nullable', 'string'],
             'features' => ['nullable', 'string'],
             'is_featured' => ['sometimes', 'boolean'],
@@ -36,8 +39,10 @@ class ProductRequest extends FormRequest
         $human = $limit->human();
 
         return [
-            'image.uploaded' => "Gambar gagal diunggah — kemungkinan besar file lebih besar dari batas server (max {$human}, upload_max_filesize={$limit->phpUpload()}, post_max_size={$limit->phpPost()}). Kompres gambarnya atau naikkan limit di php.ini.",
-            'image.max' => "Ukuran gambar terlalu besar. Maksimal {$human}.",
+            'images.*.uploaded' => "Salah satu gambar gagal diunggah — kemungkinan lebih besar dari batas server (max {$human}, upload_max_filesize={$limit->phpUpload()}, post_max_size={$limit->phpPost()}). Kompres gambarnya atau naikkan limit di php.ini.",
+            'images.*.max' => "Salah satu gambar terlalu besar. Maksimal {$human}.",
+            'images.*.image' => "Salah satu file bukan gambar yang valid.",
+            'images.*.mimes' => "Salah satu gambar harus JPG/PNG/WebP.",
         ];
     }
 

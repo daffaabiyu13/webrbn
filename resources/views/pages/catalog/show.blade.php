@@ -32,9 +32,35 @@
 <section class="bg-offwhite py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-10 lg:grid-cols-2">
-            {{-- Image --}}
-            <div class="overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100">
-                <img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
+            {{-- Gallery --}}
+            @php
+                $gallery = $product->images->map(fn ($img) => ['url' => $img->url()])->values()->all();
+                if (empty($gallery)) {
+                    $gallery = [['url' => $product->imageUrl()]];
+                }
+            @endphp
+            <div x-data="{ active: 0, images: {{ Illuminate\Support\Js::from($gallery) }} }">
+                <div class="overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100">
+                    <template x-for="(img, i) in images" :key="i">
+                        <img :src="img.url" :alt="'{{ addslashes($product->name) }} - ' + (i+1)"
+                             class="h-full w-full object-cover"
+                             x-show="active === i"
+                             x-transition.opacity>
+                    </template>
+                </div>
+
+                @if (count($gallery) > 1)
+                    <div class="mt-4 grid grid-cols-4 gap-3 sm:grid-cols-5">
+                        <template x-for="(img, i) in images" :key="i">
+                            <button type="button" @click="active = i"
+                                    class="group relative overflow-hidden rounded-lg ring-2 transition-all"
+                                    :class="active === i ? 'ring-primary' : 'ring-transparent hover:ring-secondary/50'">
+                                <img :src="img.url" alt="" class="aspect-square w-full object-cover"
+                                     :class="active === i ? '' : 'opacity-70 group-hover:opacity-100'">
+                            </button>
+                        </template>
+                    </div>
+                @endif
             </div>
 
             {{-- Info --}}

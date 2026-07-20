@@ -86,56 +86,91 @@
     {{-- Side column --}}
     <div class="space-y-5">
         @php
-            $currentImage = ($product && $product->image) ? $product->imageUrl() : null;
+            $existingImages = ($product && $product->relationLoaded('images')) ? $product->images : ($product ? $product->images()->get() : collect());
             $limit = \App\Support\UploadLimit::forProducts();
         @endphp
         <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100"
              x-data="{
-                preview: null,
-                fileName: '',
+                previews: [],
+                deleteIds: [],
                 handle(e) {
-                    const f = e.target.files && e.target.files[0];
-                    if (!f) { this.preview = null; this.fileName = ''; return; }
-                    this.fileName = f.name;
-                    const r = new FileReader();
-                    r.onload = () => this.preview = r.result;
-                    r.readAsDataURL(f);
+                    this.previews = [];
+                    const files = Array.from(e.target.files || []);
+                    files.forEach((f) => {
+                        const r = new FileReader();
+                        r.onload = () => this.previews.push({ src: r.result, name: f.name });
+                        r.readAsDataURL(f);
+                    });
                 },
-                reset() {
-                    this.preview = null;
-                    this.fileName = '';
+                clearFiles() {
+                    this.previews = [];
                     this.$refs.file.value = '';
+                },
+                toggleDelete(id) {
+                    const idx = this.deleteIds.indexOf(id);
+                    if (idx === -1) this.deleteIds.push(id);
+                    else this.deleteIds.splice(idx, 1);
+                },
+                markedForDelete(id) {
+                    return this.deleteIds.includes(id);
                 }
              }">
-            <h2 class="text-base font-semibold text-gray-800">Gambar Produk</h2>
-
-            {{-- Preview area --}}
-            <div class="mt-4 overflow-hidden rounded-lg ring-1 ring-gray-200 bg-cream/40">
-                <template x-if="preview">
-                    <img :src="preview" alt="Preview" class="w-full h-48 object-cover">
-                </template>
-                <template x-if="!preview">
-                    @if ($currentImage)
-                        <img src="{{ $currentImage }}" alt="Gambar saat ini" class="w-full h-48 object-cover">
-                    @else
-                        <div class="flex h-48 items-center justify-center text-center text-xs text-gray-400 px-4">
-                            Belum ada gambar. Pilih file di bawah untuk pratinjau.
-                        </div>
-                    @endif
-                </template>
+            <div class="flex items-center justify-between">
+                <h2 class="text-base font-semibold text-gray-800">Gambar Produk</h2>
+                <span class="text-xs text-gray-400">Multi-image</span>
             </div>
+            <p class="mt-1 text-xs text-gray-500">Gambar pertama = cover. Sisanya jadi galeri di halaman detail.</p>
 
-            <p class="mt-2 text-xs text-gray-500" x-show="preview" x-cloak>
-                Pratinjau file baru: <span x-text="fileName" class="font-medium"></span>
-                <button type="button" @click="reset()" class="ml-1 text-primary hover:underline">batal</button>
-            </p>
-            @if ($currentImage)
-                <p class="mt-2 text-xs text-gray-500" x-show="!preview">Gambar saat ini. Unggah baru untuk mengganti.</p>
+            {{-- Existing images grid --}}
+            @if ($existingImages->isNotEmpty())
+                <div class="mt-4">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-gray-500">Gambar saat ini</p>
+                    <div class="mt-2 grid grid-cols-3 gap-2">
+                        @foreach ($existingImages as $img)
+                            <div class="relative group"
+                                 :class="markedForDelete({{ $img->id }}) ? 'opacity-40' : ''">
+                                <img src="{{ $img->url() }}" alt="" class="aspect-square w-full rounded-lg object-cover ring-1 ring-gray-200">
+                                @if ($loop->first)
+                                    <span class="absolute top-1 left-1 rounded bg-primary px-1.5 py-0.5 text-[9px] font-bold uppercase text-white">Cover</span>
+                                @endif
+                                <label class="absolute inset-0 flex items-center justify-center rounded-lg bg-black/0 hover:bg-black/40 cursor-pointer transition-colors">
+                                    <input type="checkbox" name="delete_images[]" value="{{ $img->id }}"
+                                           @change="toggleDelete({{ $img->id }})"
+                                           class="peer sr-only">
+                                    <span class="hidden peer-checked:inline-flex items-center gap-1 rounded-md bg-red-600 px-2 py-1 text-[10px] font-bold text-white">
+                                        AKAN DIHAPUS
+                                    </span>
+                                    <span class="opacity-0 group-hover:opacity-100 peer-checked:hidden inline-flex items-center gap-1 rounded-md bg-white/90 px-2 py-1 text-[10px] font-semibold text-red-600">
+                                        Hapus
+                                    </span>
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @else
+                <p class="mt-4 text-xs text-gray-500">Belum ada gambar. Pilih file di bawah untuk pratinjau.</p>
             @endif
 
-            <input type="file" name="image" accept="image/*" x-ref="file" @change="handle($event)"
+            {{-- New file previews --}}
+            <div class="mt-5" x-show="previews.length > 0" x-cloak>
+                <div class="flex items-center justify-between">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-secondary">Akan diupload</p>
+                    <button type="button" @click="clearFiles()" class="text-xs font-semibold text-primary hover:underline">Bersihkan pilihan</button>
+                </div>
+                <div class="mt-2 grid grid-cols-3 gap-2">
+                    <template x-for="(p, i) in previews" :key="i">
+                        <div class="relative">
+                            <img :src="p.src" :alt="p.name" class="aspect-square w-full rounded-lg object-cover ring-2 ring-secondary">
+                            <span class="absolute bottom-1 left-1 right-1 truncate rounded bg-black/70 px-1.5 py-0.5 text-[9px] text-white" x-text="p.name"></span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <input type="file" name="images[]" accept="image/*" multiple x-ref="file" @change="handle($event)"
                    class="mt-4 block w-full text-sm text-gray-600 file:mr-3 file:rounded-lg file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-primary-dark">
-            <p class="mt-1 text-xs text-gray-400">JPG/PNG/WebP. Gambar besar akan otomatis di-resize (max 1600px) &amp; dikompres ke JPEG. Batas upload server: <b>{{ $limit->human() }}</b>.</p>
+            <p class="mt-1 text-xs text-gray-400">Pilih beberapa file sekaligus (Ctrl/Cmd + klik). JPG/PNG/WebP, otomatis di-resize (max 1600px) &amp; dikompres. Batas per file: <b>{{ $limit->human() }}</b>.</p>
         </div>
 
         <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100">

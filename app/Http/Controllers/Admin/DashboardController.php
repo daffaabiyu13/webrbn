@@ -16,7 +16,7 @@ class DashboardController extends Controller
             'categories' => ProductCategory::count(),
         ];
 
-        $recentProducts = Product::with('category')->latest()->take(5)->get();
+        $recentProducts = Product::with(['category', 'images'])->latest()->take(5)->get();
 
         return view('admin.dashboard', compact('stats', 'recentProducts'));
     }

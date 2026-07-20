@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductImage;
 use App\Support\ImageCompressor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +16,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::with('category')
+        $products = Product::with(['category', 'images'])
             ->when($request->input('search'), fn ($q, $s) => $q->where('name', 'like', "%{$s}%"))
             ->when($request->input('category'), fn ($q, $c) => $q->where('product_category_id', $c))
             ->latest()
@@ -41,18 +42,18 @@ class ProductController extends Controller
         $data['specifications'] = $request->specificationsArray();
         $data['features'] = $request->featuresArray();
 
-        if ($request->hasFile('image')) {
-            $data['image'] = ImageCompressor::forProducts()
-                ->storeCompressed($request->file('image'), 'public', 'products');
-        }
+        unset($data['images'], $data['delete_images']);
 
-        Product::create($data);
+        $product = Product::create($data);
+
+        $this->syncImages($product, $request);
 
         return redirect()->route('admin.products.index')->with('status', 'Produk berhasil ditambahkan.');
     }
 
     public function edit(Product $product)
     {
+        $product->load('images');
         $categories = ProductCategory::orderBy('name')->get();
 
         return view('admin.products.edit', compact('product', 'categories'));
@@ -65,30 +66,62 @@ class ProductController extends Controller
         $data['specifications'] = $request->specificationsArray();
         $data['features'] = $request->featuresArray();
 
-        if ($request->hasFile('image')) {
-            if ($product->image && ! str_starts_with($product->image, 'http')) {
-                Storage::disk('public')->delete($product->image);
-            }
-            $data['image'] = ImageCompressor::forProducts()
-                ->storeCompressed($request->file('image'), 'public', 'products');
-        } else {
-            unset($data['image']);
-        }
+        unset($data['images'], $data['delete_images']);
 
         $product->update($data);
+
+        $this->syncImages($product, $request);
 
         return redirect()->route('admin.products.index')->with('status', 'Produk berhasil diperbarui.');
     }
 
     public function destroy(Product $product)
     {
-        if ($product->image && ! str_starts_with($product->image, 'http')) {
-            Storage::disk('public')->delete($product->image);
+        foreach ($product->images as $image) {
+            if (! str_starts_with($image->path, 'http')) {
+                Storage::disk('public')->delete($image->path);
+            }
         }
 
         $product->delete();
 
         return redirect()->route('admin.products.index')->with('status', 'Produk berhasil dihapus.');
+    }
+
+    private function syncImages(Product $product, ProductRequest $request): void
+    {
+        // 1. Delete images the user marked
+        $deleteIds = array_filter((array) $request->input('delete_images', []));
+        if ($deleteIds) {
+            $toDelete = $product->images()->whereIn('id', $deleteIds)->get();
+            foreach ($toDelete as $image) {
+                if (! str_starts_with($image->path, 'http')) {
+                    Storage::disk('public')->delete($image->path);
+                }
+                $image->delete();
+            }
+        }
+
+        // 2. Append newly uploaded images
+        $files = $request->file('images');
+        if (! is_array($files) || empty($files)) {
+            return;
+        }
+
+        $nextPosition = (int) ($product->images()->max('position') ?? -1) + 1;
+        $compressor = ImageCompressor::forProducts();
+
+        foreach ($files as $file) {
+            if (! $file) {
+                continue;
+            }
+            $path = $compressor->storeCompressed($file, 'public', 'products');
+            ProductImage::create([
+                'product_id' => $product->id,
+                'path' => $path,
+                'position' => $nextPosition++,
+            ]);
+        }
     }
 
     private function resolveSlug(?string $slug, string $name, ?int $ignoreId = null): string
