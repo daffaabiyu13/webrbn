@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Setting;
+use App\Support\HeroStyle;
 
 class AboutController extends Controller
 {
     public function index()
     {
-        $heroBackground = Setting::get('hero_background_about');
-        if ($heroBackground && ! str_starts_with($heroBackground, 'http')) {
-            $heroBackground = asset('storage/' . $heroBackground);
-        }
+        $hero = HeroStyle::forPage('about');
 
-        return view('pages.about', compact('heroBackground'));
+        return view('pages.about', compact('hero'));
     }
 }

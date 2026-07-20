@@ -7,13 +7,12 @@
 
 {{-- Page hero --}}
 <section class="relative flex h-[300px] items-center justify-center overflow-hidden">
-    @if (!empty($heroBackground))
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $heroBackground }}');"></div>
-        <div class="absolute inset-0 bg-gradient-to-br from-primary-dark/85 via-primary/75 to-[#0d2a0b]/85"></div>
+    @if (!empty($hero['background']))
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $hero['background'] }}');"></div>
     @else
-        <div class="absolute inset-0 bg-gradient-to-br from-primary-dark via-primary to-[#0d2a0b]"></div>
-        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 30% 40%, #6DBE45 0, transparent 40%);"></div>
+        <div class="absolute inset-0 bg-gray-900"></div>
     @endif
+    <div class="absolute inset-0" style="background-color: {{ $hero['overlay_rgba'] }};"></div>
     <div class="relative text-center text-white">
         <h1 class="text-4xl font-extrabold sm:text-5xl">Katalog Produk</h1>
         <nav class="mt-3 text-sm text-white/80">
