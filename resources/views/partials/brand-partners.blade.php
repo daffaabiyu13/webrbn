@@ -2,7 +2,7 @@
     $partners = ['Schneider Electric', 'CHINT Electrics', 'LS Electric', 'EBARA', 'Trafindo'];
 @endphp
 
-<section class="border-y border-gray-200 bg-cream">
+<section class="border-y border-primary/15 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 fade-up">
         <div class="text-center">
             <h2 class="text-3xl font-semibold text-primary">{{ __('site.partners.title') }}</h2>

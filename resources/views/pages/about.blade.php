@@ -18,7 +18,7 @@
     </div>
 </section>
 
-<section class="bg-white py-20">
+<section class="bg-offwhite py-20 border-t border-primary/10">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center fade-up">
         <span class="text-sm font-semibold uppercase tracking-wider text-secondary">{{ __('site.about.profile_label') }}</span>
         <h2 class="mt-2 text-3xl font-bold text-[#1A1A1A]">{{ __('site.about.profile_title') }}</h2>
@@ -49,7 +49,7 @@
     </div>
 </section>
 
-<section class="bg-white py-20">
+<section class="bg-offwhite py-20 border-t border-primary/10">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center fade-up">
             <span class="text-sm font-semibold uppercase tracking-wider text-secondary">{{ __('site.about.values_label') }}</span>
@@ -61,7 +61,7 @@
                 [__('site.about.value_2_title'), __('site.about.value_2_body')],
                 [__('site.about.value_3_title'), __('site.about.value_3_body')],
             ] as $i => $value)
-                <div class="rounded-2xl bg-offwhite p-7 ring-1 ring-gray-100 fade-up">
+                <div class="rounded-2xl bg-white p-7 ring-1 ring-primary/10 fade-up">
                     <span class="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-lg font-bold text-white">{{ $i + 1 }}</span>
                     <h3 class="mt-5 text-lg font-bold text-[#1A1A1A]">{{ $value[0] }}</h3>
                     <p class="mt-3 text-sm text-gray-600 leading-relaxed">{{ $value[1] }}</p>
@@ -98,7 +98,7 @@
     </div>
 </section>
 
-<section class="bg-white py-20">
+<section class="bg-offwhite py-20 border-t border-primary/10">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center fade-up">
             <span class="text-sm font-semibold uppercase tracking-wider text-secondary">{{ __('site.about.segments_label') }}</span>
@@ -112,7 +112,7 @@
                 [__('site.home.industry_fnb'), 'M5 3v18M5 8h6M11 3v18M16 3c2 2 2 6 0 8v10'],
                 [__('site.home.industry_water'), 'M12 3l5.66 5.66a8 8 0 11-11.32 0L12 3z'],
             ] as $industry)
-                <div class="flex flex-col items-center justify-center rounded-2xl bg-offwhite p-6 text-center ring-1 ring-gray-100">
+                <div class="flex flex-col items-center justify-center rounded-2xl bg-white p-6 text-center ring-1 ring-primary/10">
                     <span class="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
                         <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="{{ $industry[1] }}"/></svg>
                     </span>
