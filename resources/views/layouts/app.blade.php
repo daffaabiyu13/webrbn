@@ -6,6 +6,11 @@
     <title>@yield('title', 'PT. Radika Bintang Nusantara') | PT. Radika Bintang Nusantara</title>
     <meta name="description" content="@yield('meta_description', 'PT. Radika Bintang Nusantara - Authorized Supplier & System Integrator komponen elektrikal Schneider Electric untuk industri Oil & Gas, Mining, Building, Food & Beverages, dan Water Segment.')">
 
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="alternate icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.svg') }}">
+    <meta name="theme-color" content="#416423">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
