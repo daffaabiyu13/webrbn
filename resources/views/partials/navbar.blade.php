@@ -16,9 +16,7 @@
         <div class="flex items-center justify-between h-20">
             {{-- Logo --}}
             <a href="{{ route('home') }}" class="flex items-center gap-3 group">
-                <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-primary text-white font-extrabold text-lg shadow-sm">
-                    RBN
-                </div>
+                @include('partials.brand-logo', ['size' => 'md'])
                 <div class="leading-tight">
                     <span class="block font-bold text-primary text-sm sm:text-base">PT. Radika Bintang Nusantara</span>
                     <span class="hidden sm:inline-flex items-center gap-1 mt-0.5 rounded-full bg-secondary/15 px-2 py-0.5 text-[10px] font-semibold text-primary">

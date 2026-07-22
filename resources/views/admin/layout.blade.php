@@ -38,7 +38,7 @@
     <aside class="fixed inset-y-0 left-0 z-40 w-64 -translate-x-full bg-primary text-white transition-transform md:relative md:translate-x-0"
            :class="sidebar ? 'translate-x-0' : ''">
         <div class="flex h-16 items-center gap-3 border-b border-white/10 px-5">
-            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-primary font-extrabold">RBN</div>
+            @include('partials.brand-logo', ['size' => 'sm'])
             <span class="font-bold leading-tight">Admin Panel</span>
         </div>
         <nav class="px-3 py-6 space-y-1 text-sm">

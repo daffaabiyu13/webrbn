@@ -20,7 +20,9 @@
 <body class="font-sans min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-dark via-primary to-[#1a2a10] p-4">
     <div class="w-full max-w-md">
         <div class="text-center text-white mb-8">
-            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-white text-primary text-xl font-extrabold">RBN</div>
+            <div class="mx-auto w-fit">
+                @include('partials.brand-logo', ['size' => 'lg'])
+            </div>
             <h1 class="mt-4 text-2xl font-bold">Admin Panel</h1>
             <p class="text-sm text-white/70">PT. Radika Bintang Nusantara</p>
         </div>

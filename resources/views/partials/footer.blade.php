@@ -7,7 +7,7 @@
         <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
             <div>
                 <div class="flex items-center gap-3">
-                    <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-white text-primary font-extrabold text-lg">RBN</div>
+                    @include('partials.brand-logo', ['size' => 'md'])
                     <span class="font-bold leading-tight">PT. Radika Bintang<br>Nusantara</span>
                 </div>
                 <p class="mt-4 text-sm text-white/80 leading-relaxed">
