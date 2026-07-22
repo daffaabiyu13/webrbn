@@ -20,15 +20,20 @@ class ProductRequest extends FormRequest
         return [
             'product_category_id' => ['required', 'exists:product_categories,id'],
             'name' => ['required', 'string', 'max:255'],
+            'name_en' => ['nullable', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', Rule::unique('products', 'slug')->ignore($productId)],
             'short_description' => ['required', 'string', 'max:500'],
+            'short_description_en' => ['nullable', 'string', 'max:500'],
             'full_description' => ['required', 'string'],
+            'full_description_en' => ['nullable', 'string'],
             'images' => ['nullable', 'array'],
             'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:' . UploadLimit::forProducts()->maxKb()],
             'delete_images' => ['nullable', 'array'],
             'delete_images.*' => ['integer'],
             'specifications' => ['nullable', 'string'],
+            'specifications_en' => ['nullable', 'string'],
             'features' => ['nullable', 'string'],
+            'features_en' => ['nullable', 'string'],
             'is_featured' => ['sometimes', 'boolean'],
         ];
     }
@@ -53,9 +58,9 @@ class ProductRequest extends FormRequest
         ]);
     }
 
-    public function specificationsArray(): ?array
+    public function specificationsArray(string $field = 'specifications'): ?array
     {
-        $raw = trim((string) $this->input('specifications'));
+        $raw = trim((string) $this->input($field));
         if ($raw === '') {
             return null;
         }
@@ -75,9 +80,9 @@ class ProductRequest extends FormRequest
         return $result ?: null;
     }
 
-    public function featuresArray(): ?array
+    public function featuresArray(string $field = 'features'): ?array
     {
-        $raw = trim((string) $this->input('features'));
+        $raw = trim((string) $this->input($field));
         if ($raw === '') {
             return null;
         }

@@ -11,19 +11,39 @@ class Product extends Model
     protected $fillable = [
         'product_category_id',
         'name',
+        'name_en',
         'slug',
         'short_description',
+        'short_description_en',
         'full_description',
+        'full_description_en',
         'specifications',
+        'specifications_en',
         'features',
+        'features_en',
         'is_featured',
     ];
 
     protected $casts = [
         'specifications' => 'array',
+        'specifications_en' => 'array',
         'features' => 'array',
+        'features_en' => 'array',
         'is_featured' => 'boolean',
     ];
+
+    public function translated(string $field): mixed
+    {
+        if (app()->getLocale() === 'en') {
+            $enField = $field . '_en';
+            $en = $this->{$enField} ?? null;
+            if ($en !== null && $en !== '' && $en !== []) {
+                return $en;
+            }
+        }
+
+        return $this->{$field};
+    }
 
     public function category(): BelongsTo
     {

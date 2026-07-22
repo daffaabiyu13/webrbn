@@ -1,0 +1,146 @@
+<?php
+
+return [
+    // Navigation
+    'nav' => [
+        'home' => 'Home',
+        'catalog' => 'Catalog',
+        'about' => 'About',
+        'contact' => 'Contact Us',
+        'authorized_partner' => 'Authorized Schneider Partner',
+    ],
+
+    // Language switcher
+    'lang' => [
+        'switcher' => 'Language',
+        'id' => 'Indonesian',
+        'en' => 'English',
+    ],
+
+    // Hero — Home
+    'home_hero' => [
+        'title' => 'PT. Radika Bintang Nusantara',
+        'subtitle' => 'General Supplier & System Integrator',
+        'lead' => 'Integrated electrical component solutions for Oil & Gas, Mining, Building, Food & Beverages, and Water Segment industries.',
+        'cta_catalog' => 'Browse Product Catalog',
+        'cta_about' => 'About the Company',
+        'stat_established' => 'Established',
+        'stat_established_val' => 'Since 2025',
+        'stat_offices' => 'Offices',
+        'stat_offices_val' => '2 Locations',
+        'stat_industries' => 'Industries',
+        'stat_industries_val' => '5+ Segments',
+        'stat_partner' => 'Partner',
+        'stat_partner_val' => 'Schneider',
+    ],
+
+    // Home sections
+    'home' => [
+        'featured_label' => 'Featured Products',
+        'featured_title' => 'Our Featured Products',
+        'featured_sub' => 'The best solutions from world-trusted brands',
+        'featured_empty' => 'No featured products yet.',
+        'featured_view_all' => 'View All Products',
+        'about_label' => 'About Us',
+        'about_title' => 'Your Trusted Partner in Industrial Electrical Solutions',
+        'about_lead' => 'Founded in 2025 in Sidoarjo, East Java, PT. Radika Bintang Nusantara is a General Supplier & System Integrator serving industrial electrical component needs with responsive technical support and after-sales service.',
+        'about_more' => 'Learn More',
+        'highlight_1' => 'Authorized Schneider Electric Partner',
+        'highlight_2' => 'Technical Support & After Sales Service',
+        'highlight_3' => 'System Integrator LV/MV & Automation',
+        'highlight_4' => 'Serving 5+ Industry Segments',
+        'industry_oil_gas' => 'Oil & Gas',
+        'industry_mining' => 'Mining',
+        'industry_building' => 'Building',
+        'industry_fnb' => 'Food & Beverages',
+        'industry_water' => 'Water Segment',
+    ],
+
+    // Brand partners
+    'partners' => [
+        'title' => 'Our Brand Partners',
+        'sub' => 'The best solutions from world-trusted brands',
+    ],
+
+    // Catalog
+    'catalog' => [
+        'title' => 'Product Catalog',
+        'breadcrumb_home' => 'Home',
+        'breadcrumb_current' => 'Catalog',
+        'filter_all' => 'All',
+        'search_placeholder' => 'Search products...',
+        'filter_button' => 'Filter',
+        'reset_filter' => 'Reset filter',
+        'products_found' => 'products found',
+        'empty_title' => 'No products found',
+        'empty_sub' => 'Try changing your search keyword or category filter.',
+        'empty_cta' => 'View All Products',
+        'view_detail' => 'View Detail',
+        'featured_badge' => 'Featured',
+    ],
+
+    // Product detail
+    'product' => [
+        'breadcrumb_home' => 'Home',
+        'breadcrumb_catalog' => 'Catalog',
+        'specifications' => 'Specifications',
+        'cta_email' => 'Contact Us for a Quote',
+        'cta_whatsapp' => 'WhatsApp',
+        'tab_description' => 'Full Description',
+        'tab_features' => 'Features & Highlights',
+        'features_empty' => 'Feature information not available yet.',
+        'related_title' => 'More Products in This Category',
+        'wa_greeting' => 'Hello, I would like to inquire about the product',
+    ],
+
+    // About
+    'about' => [
+        'hero_title' => 'About PT. Radika Bintang Nusantara',
+        'hero_sub' => 'Authorized Supplier & System Integrator of Electrical Components',
+        'profile_label' => 'Company Profile',
+        'profile_title' => 'About the Company',
+        'profile_p1' => 'Founded in 2025 and based in Sidoarjo, East Java, PT. Radika Bintang Nusantara is a General Supplier & System Integrator specializing in Industrial Equipment for Oil & Gas, Mining, Building, Food & Beverages, and Water Segment industries.',
+        'profile_p2' => 'To maximize customer satisfaction, our engineering and expert team stands ready to answer technical questions and client concerns, backed by a motivated and responsive marketing and sales team. PT. Radika Bintang Nusantara is trusted by overseas companies and principals as their official product partner, supporting users in technical consulting, product support, installation, application, commissioning, calibration, and after-sales service.',
+        'vision' => 'Vision',
+        'vision_body' => 'To become the best specialist supplier in electrical, energy management, industrial software, and automation. Continuously innovating with a spirit of excellence to be a better company, delivering superior products and solutions paired with skilled technical expertise.',
+        'mission' => 'Mission',
+        'mission_body' => 'Deliver the best-quality solutions, engineering services, and maintenance for our loyal customers. Serve as an electrical general supplier & system integrator for LV/MV and automation across various product brands and solutions.',
+        'values_label' => 'Company Values',
+        'values_title' => 'Our Commitment',
+        'value_1_title' => 'Market Driven Basic Implementation',
+        'value_1_body' => 'Upholding the spirit of innovation and creativity in shaping solutions that can be embraced by a wider community.',
+        'value_2_title' => 'SEM Implementation',
+        'value_2_body' => 'Providing explanations that our solutions are based on highly precise data and analysis, focused on the problem at hand.',
+        'value_3_title' => 'Decreased Industry GAP',
+        'value_3_body' => 'Our solutions are based on mature market decisions so they can deliver real impact.',
+        'data_label' => 'Company Data',
+        'data_title' => 'Legal & Contact Information',
+        'data_head_office' => 'Head Office',
+        'data_head_office_addr' => 'Taman Puspa Anggaswangi Blok P1-12 Sukodono, Sidoarjo, East Java 61258',
+        'data_branch' => 'Kalimantan Branch',
+        'data_branch_addr' => 'Jl. Makmur, Graha Permata Indah No.59, Banjarbaru, South Kalimantan 70721',
+        'data_legal' => 'Legal Aspect',
+        'data_email' => 'Email',
+        'data_phone' => 'Phone',
+        'segments_label' => 'Industry Segments',
+        'segments_title' => 'Industries We Serve',
+        'cert_label' => 'Certification & Partnership',
+        'cert_title' => 'Schneider Electric Authorized Partner',
+        'cert_partner_name' => 'PT. Radika Bintang Nusantara',
+        'cert_partner_role' => 'Control Panel Builder Partner',
+        'cert_valid' => 'Valid from 1 January 2026 to 31 December 2026',
+        'cert_signed' => 'Signed by Tonny Hendro Kusumo — Industry Business Vice President, PT Schneider Indonesia.',
+    ],
+
+    // Footer
+    'footer' => [
+        'tagline' => 'Authorized Supplier & System Integrator of electrical components for Oil & Gas, Mining, Building, Food & Beverages, and Water Segment industries.',
+        'authorized' => 'Authorized Schneider Electric Partner',
+        'quick_links' => 'Quick Links',
+        'contact' => 'Contact',
+        'partners' => 'Brand Partners',
+        'address' => 'Taman Puspa Anggaswangi Blok P1-12 Sukodono, Sidoarjo, East Java 61258',
+        'branch' => 'Kalimantan Branch: Jl. Makmur, Graha Permata Indah No.59, Banjarbaru',
+        'copyright' => 'Copyright © 2025 PT. Radika Bintang Nusantara. All rights reserved.',
+    ],
+];

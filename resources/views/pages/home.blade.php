@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Solusi Komponen Elektrikal Industrial')
-@section('meta_description', 'PT. Radika Bintang Nusantara - Authorized Schneider Electric Partner. General Supplier & System Integrator komponen elektrikal untuk Oil & Gas, Mining, Building, Food & Beverages, dan Water Segment.')
+@section('title', __('site.home_hero.subtitle'))
+@section('meta_description', __('site.home_hero.lead'))
 
 @section('content')
 
@@ -20,18 +20,18 @@
             Authorized Schneider Electric Partner
         </span>
 
-        <h1 class="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">PT. Radika Bintang Nusantara</h1>
-        <h2 class="mt-3 text-xl font-medium text-secondary sm:text-2xl">General Supplier &amp; System Integrator</h2>
+        <h1 class="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">{{ __('site.home_hero.title') }}</h1>
+        <h2 class="mt-3 text-xl font-medium text-secondary sm:text-2xl">{{ __('site.home_hero.subtitle') }}</h2>
         <p class="mx-auto mt-6 max-w-2xl text-base text-white/80 sm:text-lg">
-            Solusi terpadu komponen elektrikal untuk industri Oil &amp; Gas, Mining, Building, Food &amp; Beverages, dan Water Segment.
+            {{ __('site.home_hero.lead') }}
         </p>
 
         <div class="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a href="{{ route('catalog.index') }}" class="inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-[#5aa838]">
-                Lihat Katalog Produk
+                {{ __('site.home_hero.cta_catalog') }}
             </a>
             <a href="{{ route('about') }}" class="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-white hover:text-primary">
-                Tentang Perusahaan
+                {{ __('site.home_hero.cta_about') }}
             </a>
         </div>
     </div>
@@ -39,7 +39,12 @@
     {{-- Hero statistics --}}
     <div class="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-black/20 backdrop-blur">
         <div class="mx-auto grid max-w-5xl grid-cols-2 divide-x divide-white/10 px-4 sm:grid-cols-4">
-            @foreach ([['Berdiri', 'Sejak 2025'], ['Kantor', '2 Lokasi'], ['Industri', '5+ Segmen'], ['Partner', 'Schneider']] as $stat)
+            @foreach ([
+                [__('site.home_hero.stat_established'), __('site.home_hero.stat_established_val')],
+                [__('site.home_hero.stat_offices'), __('site.home_hero.stat_offices_val')],
+                [__('site.home_hero.stat_industries'), __('site.home_hero.stat_industries_val')],
+                [__('site.home_hero.stat_partner'), __('site.home_hero.stat_partner_val')],
+            ] as $stat)
                 <div class="px-2 py-6 text-center text-white">
                     <div class="text-2xl font-extrabold text-secondary">{{ $stat[1] }}</div>
                     <div class="mt-1 text-xs uppercase tracking-wider text-white/70">{{ $stat[0] }}</div>
@@ -53,9 +58,9 @@
 <section class="bg-offwhite py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center fade-up">
-            <span class="text-sm font-semibold uppercase tracking-wider text-secondary">Produk Pilihan</span>
-            <h2 class="mt-2 text-3xl font-bold text-[#1A1A1A] sm:text-4xl">Produk Unggulan Kami</h2>
-            <p class="mt-3 text-gray-600">Solusi terbaik dari brand terpercaya dunia</p>
+            <span class="text-sm font-semibold uppercase tracking-wider text-secondary">{{ __('site.home.featured_label') }}</span>
+            <h2 class="mt-2 text-3xl font-bold text-[#1A1A1A] sm:text-4xl">{{ __('site.home.featured_title') }}</h2>
+            <p class="mt-3 text-gray-600">{{ __('site.home.featured_sub') }}</p>
         </div>
 
         @if ($featuredProducts->isNotEmpty())
@@ -65,12 +70,12 @@
                 @endforeach
             </div>
         @else
-            <p class="mt-12 text-center text-gray-500">Belum ada produk unggulan.</p>
+            <p class="mt-12 text-center text-gray-500">{{ __('site.home.featured_empty') }}</p>
         @endif
 
         <div class="mt-12 text-center fade-up">
             <a href="{{ route('catalog.index') }}" class="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">
-                Lihat Semua Produk
+                {{ __('site.home.featured_view_all') }}
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
         </div>
@@ -82,18 +87,18 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div class="fade-up">
-                <span class="text-sm font-semibold uppercase tracking-wider text-secondary">Tentang Kami</span>
-                <h2 class="mt-2 text-3xl font-bold text-[#1A1A1A] sm:text-4xl">Mitra Terpercaya Solusi Elektrikal Industrial</h2>
+                <span class="text-sm font-semibold uppercase tracking-wider text-secondary">{{ __('site.home.about_label') }}</span>
+                <h2 class="mt-2 text-3xl font-bold text-[#1A1A1A] sm:text-4xl">{{ __('site.home.about_title') }}</h2>
                 <p class="mt-4 text-gray-600 leading-relaxed">
-                    Didirikan tahun 2025 dan berlokasi di Sidoarjo, Jawa Timur, PT. Radika Bintang Nusantara adalah General Supplier &amp; System Integrator yang melayani kebutuhan komponen elektrikal industri dengan dukungan teknis dan layanan purna jual yang responsif.
+                    {{ __('site.home.about_lead') }}
                 </p>
 
                 <ul class="mt-6 space-y-3">
                     @foreach ([
-                        'Authorized Schneider Electric Partner',
-                        'Technical Support & After Sales Service',
-                        'System Integrator LV/MV & Automation',
-                        'Melayani 5+ Segmen Industri',
+                        __('site.home.highlight_1'),
+                        __('site.home.highlight_2'),
+                        __('site.home.highlight_3'),
+                        __('site.home.highlight_4'),
                     ] as $point)
                         <li class="flex items-start gap-3">
                             <span class="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-secondary/15 text-primary">
@@ -105,17 +110,17 @@
                 </ul>
 
                 <a href="{{ route('about') }}" class="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">
-                    Pelajari Lebih Lanjut
+                    {{ __('site.home.about_more') }}
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </a>
             </div>
 
             <div class="grid grid-cols-2 gap-5 fade-up">
                 @foreach ([
-                    ['Oil & Gas', 'M3 13l2-7h14l2 7M5 13h14v6a1 1 0 01-1 1H6a1 1 0 01-1-1v-6z'],
-                    ['Mining', 'M3 21l6-6m0 0l4-9 8 8-9 4m-3 1l-1-1'],
-                    ['Building', 'M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01'],
-                    ['Food & Beverages', 'M5 3v18M5 8h6M11 3v18M16 3c2 2 2 6 0 8v10'],
+                    [__('site.home.industry_oil_gas'), 'M3 13l2-7h14l2 7M5 13h14v6a1 1 0 01-1 1H6a1 1 0 01-1-1v-6z'],
+                    [__('site.home.industry_mining'), 'M3 21l6-6m0 0l4-9 8 8-9 4m-3 1l-1-1'],
+                    [__('site.home.industry_building'), 'M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01'],
+                    [__('site.home.industry_fnb'), 'M5 3v18M5 8h6M11 3v18M16 3c2 2 2 6 0 8v10'],
                 ] as $industry)
                     <div class="flex flex-col items-center justify-center rounded-2xl bg-offwhite p-8 text-center shadow-sm ring-1 ring-gray-100">
                         <span class="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -129,7 +134,6 @@
     </div>
 </section>
 
-{{-- SECTION 4: BRAND PARTNERS --}}
 @include('partials.brand-partners')
 
 @endsection

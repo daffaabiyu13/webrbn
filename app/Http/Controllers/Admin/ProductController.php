@@ -39,8 +39,10 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = $this->resolveSlug($data['slug'] ?? null, $data['name']);
-        $data['specifications'] = $request->specificationsArray();
-        $data['features'] = $request->featuresArray();
+        $data['specifications'] = $request->specificationsArray('specifications');
+        $data['specifications_en'] = $request->specificationsArray('specifications_en');
+        $data['features'] = $request->featuresArray('features');
+        $data['features_en'] = $request->featuresArray('features_en');
 
         unset($data['images'], $data['delete_images']);
 
@@ -63,8 +65,10 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = $this->resolveSlug($data['slug'] ?? null, $data['name'], $product->id);
-        $data['specifications'] = $request->specificationsArray();
-        $data['features'] = $request->featuresArray();
+        $data['specifications'] = $request->specificationsArray('specifications');
+        $data['specifications_en'] = $request->specificationsArray('specifications_en');
+        $data['features'] = $request->featuresArray('features');
+        $data['features_en'] = $request->featuresArray('features_en');
 
         unset($data['images'], $data['delete_images']);
 

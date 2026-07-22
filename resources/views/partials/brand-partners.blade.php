@@ -5,8 +5,8 @@
 <section class="border-y border-gray-200 bg-cream">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 fade-up">
         <div class="text-center">
-            <h2 class="text-3xl font-semibold text-primary">Brand Partner Kami</h2>
-            <p class="mt-2 text-gray-600">Solusi terbaik dari brand terpercaya dunia</p>
+            <h2 class="text-3xl font-semibold text-primary">{{ __('site.partners.title') }}</h2>
+            <p class="mt-2 text-gray-600">{{ __('site.partners.sub') }}</p>
         </div>
         <div class="mt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             @foreach ($partners as $partner)
