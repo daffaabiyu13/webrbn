@@ -11,7 +11,7 @@ return new class extends Migration
         $rows = [];
 
         foreach (['home', 'catalog', 'about'] as $page) {
-            $rows[] = ['key' => "hero_overlay_color_{$page}", 'value' => '#2D6A27', 'created_at' => $now, 'updated_at' => $now];
+            $rows[] = ['key' => "hero_overlay_color_{$page}", 'value' => '#416423', 'created_at' => $now, 'updated_at' => $now];
             $rows[] = ['key' => "hero_overlay_opacity_{$page}", 'value' => '80', 'created_at' => $now, 'updated_at' => $now];
         }
 

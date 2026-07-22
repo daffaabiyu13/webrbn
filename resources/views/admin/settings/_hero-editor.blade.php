@@ -21,7 +21,7 @@
             this.$refs.file.value = '';
         },
         get overlayRgba() {
-            const h = this.overlayColor || '#2D6A27';
+            const h = this.overlayColor || '#416423';
             const r = parseInt(h.slice(1,3), 16);
             const g = parseInt(h.slice(3,5), 16);
             const b = parseInt(h.slice(5,7), 16);

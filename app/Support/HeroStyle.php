@@ -16,7 +16,7 @@ class HeroStyle
                 : asset('storage/' . $background);
         }
 
-        $color = self::normalizeHex(Setting::get("hero_overlay_color_{$page}", '#2D6A27'));
+        $color = self::normalizeHex(Setting::get("hero_overlay_color_{$page}", '#416423'));
         $opacity = self::clampOpacity((int) Setting::get("hero_overlay_opacity_{$page}", 80));
 
         return [
@@ -42,7 +42,7 @@ class HeroStyle
     {
         $hex = trim((string) $hex);
         if (! preg_match('/^#[0-9a-fA-F]{6}$/', $hex)) {
-            return '#2D6A27';
+            return '#416423';
         }
 
         return strtoupper($hex);

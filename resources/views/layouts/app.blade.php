@@ -16,12 +16,13 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#2D6A27',
-                        'primary-dark': '#1e4d1b',
-                        secondary: '#6DBE45',
-                        accent: '#F5A623',
-                        cream: '#F5F5F0',
-                        offwhite: '#F9FAF7',
+                        primary: '#416423',
+                        'primary-dark': '#2A421A',
+                        secondary: '#A5E17D',
+                        'secondary-dark': '#88CE5F',
+                        accent: '#A5E17D',
+                        cream: '#F0FFE6',
+                        offwhite: '#F0FFE6',
                     },
                     fontFamily: {
                         sans: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],
@@ -59,7 +60,7 @@
         /* Top progress bar (navigation feedback) */
         #nav-progress {
             position: fixed; top: 0; left: 0; right: 0; height: 3px;
-            background: #6DBE45; transform: scaleX(0); transform-origin: 0 0;
+            background: #A5E17D; transform: scaleX(0); transform-origin: 0 0;
             transition: transform .25s ease; z-index: 100; pointer-events: none;
         }
         #nav-progress.is-loading { transform: scaleX(0.7); transition: transform 2.5s cubic-bezier(.1,.7,.6,.98); }

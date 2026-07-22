@@ -11,13 +11,13 @@
     <script>
         tailwind.config = {
             theme: { extend: {
-                colors: { primary: '#2D6A27', 'primary-dark': '#1e4d1b', secondary: '#6DBE45' },
+                colors: { primary: '#416423', 'primary-dark': '#2A421A', secondary: '#A5E17D' },
                 fontFamily: { sans: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
             } },
         };
     </script>
 </head>
-<body class="font-sans min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-dark via-primary to-[#0d2a0b] p-4">
+<body class="font-sans min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-dark via-primary to-[#1a2a10] p-4">
     <div class="w-full max-w-md">
         <div class="text-center text-white mb-8">
             <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-white text-primary text-xl font-extrabold">RBN</div>

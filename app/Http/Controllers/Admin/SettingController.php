@@ -57,7 +57,7 @@ class SettingController extends Controller
         ], [
             'hero_background.uploaded' => "Gambar gagal diunggah — kemungkinan besar file lebih besar dari batas server (max {$human}, upload_max_filesize={$limit->phpUpload()}, post_max_size={$limit->phpPost()}). Kompres gambarnya atau naikkan limit di php.ini.",
             'hero_background.max' => "Ukuran gambar terlalu besar. Maksimal {$human}.",
-            'overlay_color.regex' => 'Warna overlay harus dalam format hex (contoh: #2D6A27).',
+            'overlay_color.regex' => 'Warna overlay harus dalam format hex (contoh: #416423).',
         ]);
 
         // Overlay color + opacity always saved on submit (independent of image)

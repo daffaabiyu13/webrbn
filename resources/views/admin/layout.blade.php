@@ -14,12 +14,13 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#2D6A27',
-                        'primary-dark': '#1e4d1b',
-                        secondary: '#6DBE45',
-                        accent: '#F5A623',
-                        cream: '#F5F5F0',
-                        offwhite: '#F9FAF7',
+                        primary: '#416423',
+                        'primary-dark': '#2A421A',
+                        secondary: '#A5E17D',
+                        'secondary-dark': '#88CE5F',
+                        accent: '#A5E17D',
+                        cream: '#F0FFE6',
+                        offwhite: '#F0FFE6',
                     },
                     fontFamily: {
                         sans: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],
