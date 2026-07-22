@@ -1,11 +1,14 @@
 {{-- Expects: $product (with category loaded) --}}
 <div class="group flex flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-    <div class="relative aspect-[3/2] overflow-hidden bg-cream">
-        <img src="{{ $product->imageUrl() }}" alt="{{ $product->translated('name') }}"
-             loading="lazy"
-             class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+    <div class="relative">
+        @include('partials.skeleton-image', [
+            'src' => $product->imageUrl(),
+            'alt' => $product->translated('name'),
+            'wrapClass' => 'relative aspect-[3/2] overflow-hidden bg-cream',
+            'imgClass' => 'h-full w-full object-cover transition-transform duration-500 group-hover:scale-105',
+        ])
         @if ($product->is_featured)
-            <span class="absolute top-3 right-3 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow">{{ __('site.catalog.featured_badge') }}</span>
+            <span class="absolute top-3 right-3 z-10 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow">{{ __('site.catalog.featured_badge') }}</span>
         @endif
     </div>
 

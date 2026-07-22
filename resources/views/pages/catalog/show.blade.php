@@ -40,13 +40,17 @@
                     $gallery = [['url' => $product->imageUrl()]];
                 }
             @endphp
-            <div x-data="{ active: 0, images: {{ Illuminate\Support\Js::from($gallery) }} }">
-                <div class="overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100">
+            <div x-data="{ active: 0, mainLoaded: false, images: {{ Illuminate\Support\Js::from($gallery) }} }">
+                <div class="relative aspect-[3/2] overflow-hidden rounded-2xl bg-cream shadow-md ring-1 ring-gray-100">
+                    <div x-show="!mainLoaded" class="absolute inset-0 skeleton" aria-hidden="true"></div>
                     <template x-for="(img, i) in images" :key="i">
                         <img :src="img.url" :alt="'{{ addslashes($product->translated('name')) }} - ' + (i+1)"
-                             class="h-full w-full object-cover"
+                             class="absolute inset-0 h-full w-full object-cover img-fade"
+                             :class="mainLoaded ? 'is-loaded' : ''"
                              x-show="active === i"
-                             x-transition.opacity>
+                             x-transition.opacity
+                             @load="if (active === i) mainLoaded = true"
+                             x-init="if ($el.complete && active === i) mainLoaded = true">
                     </template>
                 </div>
 
