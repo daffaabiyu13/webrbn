@@ -83,7 +83,7 @@
 </section>
 
 {{-- SECTION 3: COMPANY SNAPSHOT --}}
-<section class="bg-offwhite py-20 border-t border-primary/10">
+<section class="bg-white py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div class="fade-up">
@@ -122,7 +122,7 @@
                     [__('site.home.industry_building'), 'M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01'],
                     [__('site.home.industry_fnb'), 'M5 3v18M5 8h6M11 3v18M16 3c2 2 2 6 0 8v10'],
                 ] as $industry)
-                    <div class="flex flex-col items-center justify-center rounded-2xl bg-white p-8 text-center shadow-sm ring-1 ring-primary/10">
+                    <div class="flex flex-col items-center justify-center rounded-2xl bg-offwhite p-8 text-center shadow-sm ring-1 ring-gray-100">
                         <span class="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
                             <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="{{ $industry[1] }}"/></svg>
                         </span>

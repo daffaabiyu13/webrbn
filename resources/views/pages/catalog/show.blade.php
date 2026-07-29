@@ -15,7 +15,7 @@
 @endphp
 
 {{-- Breadcrumb --}}
-<section class="bg-offwhite border-b border-primary/10">
+<section class="bg-white border-b border-gray-100">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
         <nav class="flex flex-wrap items-center gap-2 text-sm text-gray-500">
             <a href="{{ route('home') }}" class="hover:text-primary">{{ __('site.product.breadcrumb_home') }}</a>
@@ -107,7 +107,7 @@
     </div>
 </section>
 
-<section class="bg-offwhite py-14 border-t border-primary/10" x-data="{ tab: 'desc' }">
+<section class="bg-white py-14" x-data="{ tab: 'desc' }">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex gap-2 border-b border-gray-200">
             <button @click="tab = 'desc'" :class="tab === 'desc' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-primary'"
@@ -125,7 +125,7 @@
                 @if (!empty($features) && is_array($features))
                     <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                         @foreach ($features as $feature)
-                            <li class="flex items-start gap-3 rounded-xl bg-white p-4 ring-1 ring-primary/10">
+                            <li class="flex items-start gap-3 rounded-xl bg-offwhite p-4 ring-1 ring-gray-100">
                                 <span class="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-secondary/15 text-primary">
                                     <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.3 3.29 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd"/></svg>
                                 </span>

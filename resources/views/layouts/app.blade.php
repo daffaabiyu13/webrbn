@@ -75,7 +75,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @stack('head')
 </head>
-<body class="font-sans bg-offwhite text-[#1A1A1A] antialiased">
+<body class="font-sans bg-white text-[#1A1A1A] antialiased">
 
     <div id="nav-progress"></div>
 
