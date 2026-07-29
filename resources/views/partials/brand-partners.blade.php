@@ -17,20 +17,20 @@
             <p class="mt-2 text-gray-600">{{ __('site.partners.sub') }}</p>
         </div>
 
-        <div class="mt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-8 sm:gap-12 lg:gap-16">
             @foreach ($partners as $partner)
                 @php
                     $logoPath = public_path('images/partners/' . $partner['logo']);
                     $hasLogo = file_exists($logoPath);
                 @endphp
-                <div class="flex h-20 min-w-[160px] items-center justify-center rounded-xl border border-gray-200 bg-white px-6 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5">
+                <div class="flex items-center justify-center">
                     @if ($hasLogo)
                         <img src="{{ asset('images/partners/' . $partner['logo']) }}"
                              alt="{{ $partner['name'] }}"
                              loading="lazy"
-                             class="max-h-12 max-w-[140px] object-contain grayscale opacity-80 transition-all hover:grayscale-0 hover:opacity-100">
+                             class="h-20 sm:h-24 w-auto max-w-[200px] object-contain transition-transform hover:scale-105">
                     @else
-                        <span class="text-base font-bold text-primary">{{ $partner['name'] }}</span>
+                        <span class="text-lg font-bold text-primary">{{ $partner['name'] }}</span>
                     @endif
                 </div>
             @endforeach
