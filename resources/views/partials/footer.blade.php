@@ -1,5 +1,5 @@
 @php
-    $partners = ['Schneider Electric', 'CHINT Electrics', 'LS Electric', 'EBARA', 'Trafindo'];
+    $partners = ['Schneider Electric', 'CHINT Electrics', 'LS Electric', 'Trafindo'];
 @endphp
 
 <footer class="bg-primary text-white">
