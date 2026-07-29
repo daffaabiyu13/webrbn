@@ -126,7 +126,7 @@
                         <span class="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
                             <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="{{ $industry[1] }}"/></svg>
                         </span>
-                        <span class="mt-4 font-semibold text-gray-800">{{ $industry[0] }}</span>
+                        <span class="mt-2 font-semibold text-gray-800">{{ $industry[0] }}</span>
                     </div>
                 @endforeach
             </div>
