@@ -31,7 +31,7 @@
     </div>
 </section>
 
-<section class="bg-offwhite py-12">
+<section class="bg-white py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-10 lg:grid-cols-2">
             @php
@@ -142,7 +142,7 @@
 </section>
 
 @if ($related->isNotEmpty())
-<section class="bg-offwhite py-16">
+<section class="bg-white py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 class="text-2xl font-bold text-[#1A1A1A] sm:text-3xl">{{ __('site.product.related_title') }}</h2>
         <div class="mt-8 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">

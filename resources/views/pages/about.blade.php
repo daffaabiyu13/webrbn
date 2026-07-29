@@ -27,7 +27,7 @@
     </div>
 </section>
 
-<section class="bg-offwhite py-16">
+<section class="bg-white py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
             <div class="rounded-2xl bg-white p-8 shadow-md ring-1 ring-gray-100 fade-up">
@@ -71,7 +71,7 @@
     </div>
 </section>
 
-<section class="bg-offwhite py-20">
+<section class="bg-white py-20">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div class="text-center fade-up">
             <span class="text-sm font-semibold uppercase tracking-wider text-secondary">{{ __('site.about.data_label') }}</span>
@@ -123,7 +123,7 @@
     </div>
 </section>
 
-<section class="bg-offwhite py-20">
+<section class="bg-white py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div class="text-center fade-up">
             <span class="text-sm font-semibold uppercase tracking-wider text-secondary">{{ __('site.about.cert_label') }}</span>

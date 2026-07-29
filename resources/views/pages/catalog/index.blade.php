@@ -23,7 +23,7 @@
     </div>
 </section>
 
-<section class="bg-offwhite py-14">
+<section class="bg-white py-14">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {{-- Filter bar --}}

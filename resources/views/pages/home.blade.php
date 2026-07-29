@@ -55,7 +55,7 @@
 </section>
 
 {{-- SECTION 2: BEST PRODUCTS --}}
-<section class="bg-offwhite py-20">
+<section class="bg-white py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center fade-up">
             <span class="text-sm font-semibold uppercase tracking-wider text-secondary">{{ __('site.home.featured_label') }}</span>
