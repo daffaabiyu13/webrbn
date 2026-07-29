@@ -39,7 +39,7 @@
             </div>
 
             <div class="rounded-2xl bg-white p-8 shadow-md ring-1 ring-gray-100 fade-up">
-                <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-white">
+                <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-white">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 </span>
                 <h3 class="mt-5 text-2xl font-bold text-primary">{{ __('site.about.mission') }}</h3>
