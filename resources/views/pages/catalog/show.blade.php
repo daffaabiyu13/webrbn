@@ -7,7 +7,7 @@
 
 @php
     $waText = rawurlencode(__('site.product.wa_greeting') . ' ' . $product->translated('name'));
-    $waLink = 'https://wa.me/6281232048578?text=' . $waText;
+    $waLink = 'https://wa.me/6285330330396?text=' . $waText;
     $mailLink = 'mailto:pt.radikabintang@gmail.com?subject=' . rawurlencode('Penawaran Produk: ' . $product->translated('name'));
 
     $specs = $product->translated('specifications');

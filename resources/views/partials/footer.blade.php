@@ -30,10 +30,34 @@
             <div>
                 <h3 class="text-sm font-semibold uppercase tracking-wider text-secondary">{{ __('site.footer.contact') }}</h3>
                 <ul class="mt-4 space-y-3 text-sm text-white/80">
-                    <li class="flex gap-2"><span>&#128222;</span><a href="tel:081232048578" class="hover:text-secondary">081232048578</a></li>
-                    <li class="flex gap-2"><span>&#9993;</span><a href="mailto:pt.radikabintang@gmail.com" class="hover:text-secondary break-all">pt.radikabintang@gmail.com</a></li>
-                    <li class="flex gap-2"><span>&#128205;</span><span>{{ __('site.footer.address') }}</span></li>
-                    <li class="flex gap-2"><span>&#127970;</span><span>{{ __('site.footer.branch') }}</span></li>
+                    <li class="flex items-start gap-2.5">
+                        <svg class="mt-0.5 h-4 w-4 flex-none text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h2.28a2 2 0 011.9 1.37l1 3.02a2 2 0 01-.5 2.06L8.4 10.79a12 12 0 004.8 4.8l1.34-1.28a2 2 0 012.06-.5l3.02 1a2 2 0 011.37 1.9V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
+                        </svg>
+                        <span class="flex flex-col gap-0.5">
+                            <a href="tel:+6285330330396" class="hover:text-secondary">+62 853-3033-0396</a>
+                            <a href="tel:+6282123345758" class="hover:text-secondary">+62 821-2334-5758</a>
+                        </span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <svg class="mt-0.5 h-4 w-4 flex-none text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <a href="mailto:pt.radikabintang@gmail.com" class="hover:text-secondary break-all">pt.radikabintang@gmail.com</a>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <svg class="mt-0.5 h-4 w-4 flex-none text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <span>{{ __('site.footer.address') }}</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <svg class="mt-0.5 h-4 w-4 flex-none text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                        <span>{{ __('site.footer.branch') }}</span>
+                    </li>
                 </ul>
             </div>
 
