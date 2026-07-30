@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ProductCategoryController as AdminProductCategoryController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Auth\LoginController;
@@ -32,6 +33,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('products', AdminProductController::class)->except(['show']);
+    Route::resource('categories', AdminProductCategoryController::class)->except(['show']);
     Route::get('/settings', [AdminSettingController::class, 'edit'])->name('settings.edit');
     Route::post('/settings/hero/{page}', [AdminSettingController::class, 'updateHero'])
         ->whereIn('page', ['home', 'catalog', 'about'])
