@@ -29,7 +29,7 @@
             </p>
 
             <div class="mt-8 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
-                <a href="{{ route('catalog.index') }}" class="inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-6 py-3.5 text-sm sm:text-base font-semibold text-white shadow-lg transition-colors hover:bg-[#5aa838]">
+                <a href="{{ route('catalog.index') }}" class="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-sm sm:text-base font-semibold text-white shadow-lg transition-colors hover:bg-primary-dark">
                     {{ __('site.home_hero.cta_catalog') }}
                 </a>
                 <a href="{{ route('about') }}" class="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-6 py-3.5 text-sm sm:text-base font-semibold text-white transition-colors hover:bg-white hover:text-primary">
