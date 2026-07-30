@@ -70,8 +70,9 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Deskripsi Lengkap (ID) <span class="text-red-500">*</span></label>
                         <textarea name="full_description" required rows="8"
-                                  class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 font-mono text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">{{ old('full_description', $product->full_description ?? '') }}</textarea>
-                        <p class="mt-1 text-xs text-gray-400">HTML diperbolehkan (mis. <code>&lt;p&gt;</code>, <code>&lt;strong&gt;</code>).</p>
+                                  placeholder="Tulis deskripsi lengkap produk di sini.&#10;&#10;Tekan Enter dua kali untuk pindah paragraf baru."
+                                  class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">{{ old('full_description', $product->full_description ?? '') }}</textarea>
+                        <p class="mt-1 text-xs text-gray-400">Cukup ketik biasa. <b>Tekan Enter</b> untuk baris baru, <b>Enter dua kali</b> untuk paragraf baru — sistem akan format otomatis.</p>
                     </div>
                 </div>
 
@@ -93,7 +94,9 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Full Description (EN)</label>
                         <textarea name="full_description_en" rows="8"
-                                  class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 font-mono text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">{{ old('full_description_en', $product->full_description_en ?? '') }}</textarea>
+                                  placeholder="Write the full product description here.&#10;&#10;Press Enter twice to start a new paragraph."
+                                  class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">{{ old('full_description_en', $product->full_description_en ?? '') }}</textarea>
+                        <p class="mt-1 text-xs text-gray-400">Just type normally. <b>Enter</b> for a line break, <b>Enter twice</b> for a new paragraph.</p>
                     </div>
                 </div>
             </div>

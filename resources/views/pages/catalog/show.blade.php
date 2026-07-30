@@ -118,7 +118,7 @@
 
         <div class="mt-8">
             <div x-show="tab === 'desc'" class="prose max-w-none text-gray-600 leading-relaxed [&_p]:mb-4 [&_strong]:text-gray-800">
-                {!! $product->translated('full_description') !!}
+                {!! $product->formattedDescription() !!}
             </div>
 
             <div x-show="tab === 'features'" x-cloak>

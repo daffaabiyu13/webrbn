@@ -45,6 +45,31 @@ class Product extends Model
         return $this->{$field};
     }
 
+    /**
+     * Render full_description as HTML — accepts both plain text (Enter for
+     * new paragraphs, double Enter for paragraph breaks) and legacy HTML
+     * content that already contains <p>/<strong>/etc.
+     */
+    public function formattedDescription(): string
+    {
+        $text = (string) ($this->translated('full_description') ?? '');
+        if (trim($text) === '') {
+            return '';
+        }
+
+        // Already contains block-level HTML — trust it as-is.
+        if (preg_match('/<(p|div|ul|ol|h[1-6]|section|article|br)\b/i', $text)) {
+            return $text;
+        }
+
+        // Plain text: split on blank line(s) → paragraphs, single line break → <br>.
+        $paragraphs = preg_split('/\r\n{2,}|\r{2,}|\n{2,}/', trim($text));
+
+        return collect($paragraphs)
+            ->map(fn ($p) => '<p>' . nl2br(e(trim($p))) . '</p>')
+            ->implode('');
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(ProductCategory::class, 'product_category_id');
