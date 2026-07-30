@@ -6,7 +6,7 @@
 @section('content')
 
 {{-- SECTION 1: HERO --}}
-<section class="relative flex min-h-[90vh] items-center overflow-hidden">
+<section class="relative flex flex-col min-h-[90vh] overflow-hidden">
     @if (!empty($hero['background']))
         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $hero['background'] }}');"></div>
     @else
@@ -14,40 +14,43 @@
     @endif
     <div class="absolute inset-0" style="background-color: {{ $hero['overlay_rgba'] }};"></div>
 
-    <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-24 text-center text-white">
-        <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium ring-1 ring-white/20 backdrop-blur">
-            <svg class="h-4 w-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.3 3.29 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd"/></svg>
-            Authorized Schneider Electric Partner
-        </span>
+    {{-- Main content — flex-1 so it fills remaining space above stats --}}
+    <div class="relative flex flex-1 items-center">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center text-white">
+            <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs sm:text-sm font-medium ring-1 ring-white/20 backdrop-blur">
+                <svg class="h-4 w-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.3 3.29 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd"/></svg>
+                Authorized Schneider Electric Partner
+            </span>
 
-        <h1 class="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">{{ __('site.home_hero.title') }}</h1>
-        <h2 class="mt-3 text-xl font-medium text-secondary sm:text-2xl">{{ __('site.home_hero.subtitle') }}</h2>
-        <p class="mx-auto mt-6 max-w-2xl text-base text-white/80 sm:text-lg">
-            {{ __('site.home_hero.lead') }}
-        </p>
+            <h1 class="mt-6 text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">{{ __('site.home_hero.title') }}</h1>
+            <h2 class="mt-3 text-lg font-medium text-secondary sm:text-2xl">{{ __('site.home_hero.subtitle') }}</h2>
+            <p class="mx-auto mt-6 max-w-2xl text-sm text-white/80 sm:text-lg">
+                {{ __('site.home_hero.lead') }}
+            </p>
 
-        <div class="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a href="{{ route('catalog.index') }}" class="inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-[#5aa838]">
-                {{ __('site.home_hero.cta_catalog') }}
-            </a>
-            <a href="{{ route('about') }}" class="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-white hover:text-primary">
-                {{ __('site.home_hero.cta_about') }}
-            </a>
+            <div class="mt-8 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
+                <a href="{{ route('catalog.index') }}" class="inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-6 py-3.5 text-sm sm:text-base font-semibold text-white shadow-lg transition-colors hover:bg-[#5aa838]">
+                    {{ __('site.home_hero.cta_catalog') }}
+                </a>
+                <a href="{{ route('about') }}" class="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-6 py-3.5 text-sm sm:text-base font-semibold text-white transition-colors hover:bg-white hover:text-primary">
+                    {{ __('site.home_hero.cta_about') }}
+                </a>
+            </div>
         </div>
     </div>
 
-    {{-- Hero statistics --}}
-    <div class="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-black/20 backdrop-blur">
-        <div class="mx-auto grid max-w-5xl grid-cols-2 divide-x divide-white/10 px-4 sm:grid-cols-4">
+    {{-- Hero statistics — normal flow so it never overlaps content --}}
+    <div class="relative border-t border-white/10 bg-black/20 backdrop-blur">
+        <div class="mx-auto grid max-w-5xl grid-cols-2 divide-x divide-y divide-white/10 sm:divide-y-0 sm:grid-cols-4">
             @foreach ([
                 [__('site.home_hero.stat_established'), __('site.home_hero.stat_established_val')],
                 [__('site.home_hero.stat_offices'), __('site.home_hero.stat_offices_val')],
                 [__('site.home_hero.stat_industries'), __('site.home_hero.stat_industries_val')],
                 [__('site.home_hero.stat_partner'), __('site.home_hero.stat_partner_val')],
             ] as $stat)
-                <div class="px-2 py-6 text-center text-white">
-                    <div class="text-2xl font-extrabold text-secondary">{{ $stat[1] }}</div>
-                    <div class="mt-1 text-xs uppercase tracking-wider text-white/70">{{ $stat[0] }}</div>
+                <div class="px-3 py-5 sm:py-6 text-center text-white">
+                    <div class="text-lg sm:text-2xl font-extrabold text-secondary">{{ $stat[1] }}</div>
+                    <div class="mt-1 text-[10px] sm:text-xs uppercase tracking-wider text-white/70">{{ $stat[0] }}</div>
                 </div>
             @endforeach
         </div>
