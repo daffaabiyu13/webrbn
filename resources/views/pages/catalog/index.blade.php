@@ -6,7 +6,7 @@
 @section('content')
 
 {{-- Page hero --}}
-<section class="relative flex h-[300px] items-center justify-center overflow-hidden">
+<section class="relative flex h-[380px] -mt-20 items-center justify-center overflow-hidden pt-20">
     @if (!empty($hero['background']))
         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $hero['background'] }}');"></div>
     @else

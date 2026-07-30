@@ -4,11 +4,17 @@
         ['label' => __('site.nav.catalog'), 'route' => 'catalog.index'],
         ['label' => __('site.nav.about'), 'route' => 'about'],
     ];
+    // Pages that don't start with a dark hero — force the header to its
+    // solid state so the white nav text stays readable.
+    $forceSolidNav = request()->routeIs('catalog.show');
 @endphp
 
 <header
-    x-data="{ open: false, scrolled: false }"
-    x-init="scrolled = window.scrollY > 80; window.addEventListener('scroll', () => scrolled = window.scrollY > 80)"
+    x-data="{ open: false, scrolled: false, forceSolid: @json($forceSolidNav) }"
+    x-init="
+        scrolled = forceSolid || window.scrollY > 80;
+        window.addEventListener('scroll', () => scrolled = forceSolid || window.scrollY > 80)
+    "
     class="sticky top-0 z-50 transition-all duration-300"
     :class="scrolled || open
         ? 'bg-primary shadow-lg'
