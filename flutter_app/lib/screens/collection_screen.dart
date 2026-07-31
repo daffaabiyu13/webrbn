@@ -536,9 +536,9 @@ class _FilterSheetState extends State<_FilterSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final maxPrice =
-        widget.filters.maxPrice > 0 ? widget.filters.maxPrice : 1000000;
-    final minPrice = widget.filters.minPrice;
+    final double maxPrice =
+        widget.filters.maxPrice > 0 ? widget.filters.maxPrice : 1000000.0;
+    final double minPrice = widget.filters.minPrice;
 
     return DraggableScrollableSheet(
       expand: false,
