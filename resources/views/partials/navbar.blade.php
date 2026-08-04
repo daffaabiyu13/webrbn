@@ -2,6 +2,7 @@
     $navLinks = [
         ['label' => __('site.nav.home'), 'route' => 'home'],
         ['label' => __('site.nav.catalog'), 'route' => 'catalog.index'],
+        ['label' => __('site.nav.projects'), 'route' => 'projects.index'],
         ['label' => __('site.nav.about'), 'route' => 'about'],
     ];
     // Pages that don't start with a dark hero — force the header to its

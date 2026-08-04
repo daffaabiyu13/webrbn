@@ -5,9 +5,17 @@ return [
     'nav' => [
         'home' => 'Home',
         'catalog' => 'Catalog',
+        'projects' => 'Projects',
         'about' => 'About',
         'contact' => 'Contact Us',
         'authorized_partner' => 'Authorized Schneider Partner',
+    ],
+
+    'projects' => [
+        'title' => 'Our Projects',
+        'subtitle' => 'Portfolio of projects we have delivered with clients across multiple industries.',
+        'empty_title' => 'No projects yet',
+        'empty_sub' => 'Our project portfolio is coming soon.',
     ],
 
     // Language switcher

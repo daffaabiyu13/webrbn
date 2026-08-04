@@ -5,9 +5,17 @@ return [
     'nav' => [
         'home' => 'Beranda',
         'catalog' => 'Katalog',
+        'projects' => 'Proyek',
         'about' => 'Tentang',
         'contact' => 'Hubungi Kami',
         'authorized_partner' => 'Authorized Schneider Partner',
+    ],
+
+    'projects' => [
+        'title' => 'Proyek Kami',
+        'subtitle' => 'Portofolio proyek yang telah kami kerjakan bersama klien dari berbagai industri.',
+        'empty_title' => 'Belum ada proyek',
+        'empty_sub' => 'Portofolio proyek akan segera hadir.',
     ],
 
     // Language switcher
