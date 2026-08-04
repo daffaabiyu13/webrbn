@@ -10,20 +10,26 @@
     .project-stack { position: relative; }
     .project-stack section.sticky-scene {
         position: sticky;
-        top: 5rem; /* sits directly below the 80px navbar */
-        height: calc(100vh - 5rem);
-        min-height: 560px;
+        top: 0; /* fills the full viewport, navbar floats above */
+        height: 100vh;
+        min-height: 620px;
         overflow: hidden;
         /* Full-bleed, rounded on the top corners only */
         border-radius: 2rem 2rem 0 0;
         /* Upward shadow so each card reads as sliding over the previous */
         box-shadow: 0 -20px 45px -12px rgba(0, 0, 0, 0.55);
     }
+    /* Intro scene has no rounded top since it's the first surface the user sees */
+    .project-stack section.sticky-scene.is-intro {
+        border-radius: 0;
+        box-shadow: none;
+    }
     @media (max-width: 640px) {
         .project-stack section.sticky-scene {
             border-radius: 1.5rem 1.5rem 0 0;
-            min-height: 520px;
+            min-height: 560px;
         }
+        .project-stack section.sticky-scene.is-intro { border-radius: 0; }
     }
     @media (min-width: 768px) {
         html { scroll-behavior: smooth; }
@@ -39,28 +45,30 @@
 
 @section('content')
 
-{{-- Intro hero (image + overlay editable via /admin/settings) --}}
-<section class="relative flex min-h-[520px] -mt-20 items-center justify-center overflow-hidden pt-20 pb-32">
-    @if (!empty($hero['background']))
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $hero['background'] }}');"></div>
-    @else
-        <div class="absolute inset-0 bg-gray-900"></div>
-    @endif
-    <div class="absolute inset-0" style="background-color: {{ $hero['overlay_rgba'] }};"></div>
-
-    <div class="relative text-center text-white px-4">
-        <h1 class="text-4xl font-extrabold sm:text-5xl">{{ __('site.projects.title') }}</h1>
-        <p class="mt-3 text-white/85 max-w-2xl mx-auto">{{ __('site.projects.subtitle') }}</p>
-        <div class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-secondary">
-            <span>Scroll ke bawah</span>
-            <svg class="h-4 w-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-        </div>
-    </div>
-</section>
-
 @if ($projects->isNotEmpty())
-    {{-- Sticky-stack scroll: each project fills the viewport, next slides over --}}
-    <div class="project-stack relative -mt-24">
+    {{-- Sticky-stack scroll: intro hero is scene 0; each project slides over the previous --}}
+    <div class="project-stack relative -mt-20">
+        {{-- Intro hero as the first sticky scene (image + overlay editable via /admin/settings) --}}
+        <section class="sticky-scene is-intro" style="z-index: 5">
+            @if (!empty($hero['background']))
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $hero['background'] }}');"></div>
+            @else
+                <div class="absolute inset-0 bg-gray-900"></div>
+            @endif
+            <div class="absolute inset-0" style="background-color: {{ $hero['overlay_rgba'] }};"></div>
+
+            <div class="relative flex h-full items-center justify-center">
+                <div class="text-center text-white px-4">
+                    <h1 class="text-4xl font-extrabold sm:text-5xl">{{ __('site.projects.title') }}</h1>
+                    <p class="mt-3 text-white/85 max-w-2xl mx-auto">{{ __('site.projects.subtitle') }}</p>
+                    <div class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-secondary">
+                        <span>Scroll ke bawah</span>
+                        <svg class="h-4 w-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         @foreach ($projects as $project)
             <section class="sticky-scene" style="z-index: {{ 10 + $loop->index }}">
                 {{-- Background photo with slow ken-burns --}}
@@ -145,6 +153,20 @@
         </section>
     @endif
 @else
+    {{-- Fallback intro hero when no projects exist --}}
+    <section class="relative flex min-h-[520px] -mt-20 items-center justify-center overflow-hidden pt-20 pb-32">
+        @if (!empty($hero['background']))
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $hero['background'] }}');"></div>
+        @else
+            <div class="absolute inset-0 bg-gray-900"></div>
+        @endif
+        <div class="absolute inset-0" style="background-color: {{ $hero['overlay_rgba'] }};"></div>
+        <div class="relative text-center text-white px-4">
+            <h1 class="text-4xl font-extrabold sm:text-5xl">{{ __('site.projects.title') }}</h1>
+            <p class="mt-3 text-white/85 max-w-2xl mx-auto">{{ __('site.projects.subtitle') }}</p>
+        </div>
+    </section>
+
     <section class="bg-white py-24">
         <div class="mx-auto max-w-3xl rounded-2xl bg-cream p-16 text-center">
             <p class="text-lg font-semibold text-gray-700">{{ __('site.projects.empty_title') }}</p>

@@ -5,11 +5,9 @@
         ['label' => __('site.nav.projects'), 'route' => 'projects.index'],
         ['label' => __('site.nav.about'), 'route' => 'about'],
     ];
-    // Pages that don't start with a dark hero OR use sticky stacked
-    // sections — force the header to its solid state so the white nav
-    // text stays readable throughout the scroll.
-    $forceSolidNav = request()->routeIs('catalog.show')
-        || request()->routeIs('projects.index');
+    // Pages that don't start with a dark hero — force the header to its
+    // solid state so the white nav text stays readable.
+    $forceSolidNav = request()->routeIs('catalog.show');
 @endphp
 
 <header
