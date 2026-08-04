@@ -5,7 +5,8 @@
         ['name' => 'Schneider Electric', 'logo' => 'schneider.png'],
         ['name' => 'CHINT Electrics',    'logo' => 'chint.png'],
         ['name' => 'LS Electric',        'logo' => 'ls-electric.png'],
-        ['name' => 'EBARA',              'logo' => 'ebara.png'],
+        ['name' => 'ABB',                'logo' => 'abb.png'],
+        ['name' => 'Siemens',            'logo' => 'siemens.png'],
         ['name' => 'Trafindo',           'logo' => 'trafindo.png'],
     ];
 @endphp
