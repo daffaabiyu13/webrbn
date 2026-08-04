@@ -40,7 +40,7 @@
 @section('content')
 
 {{-- Intro hero (image + overlay editable via /admin/settings) --}}
-<section class="relative flex h-[420px] -mt-20 items-end justify-center overflow-hidden pt-20">
+<section class="relative flex min-h-[520px] -mt-20 items-center justify-center overflow-hidden pt-20 pb-32">
     @if (!empty($hero['background']))
         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $hero['background'] }}');"></div>
     @else
@@ -48,7 +48,7 @@
     @endif
     <div class="absolute inset-0" style="background-color: {{ $hero['overlay_rgba'] }};"></div>
 
-    <div class="relative text-center text-white px-4 pb-12">
+    <div class="relative text-center text-white px-4">
         <h1 class="text-4xl font-extrabold sm:text-5xl">{{ __('site.projects.title') }}</h1>
         <p class="mt-3 text-white/85 max-w-2xl mx-auto">{{ __('site.projects.subtitle') }}</p>
         <div class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-secondary">
@@ -60,7 +60,7 @@
 
 @if ($projects->isNotEmpty())
     {{-- Sticky-stack scroll: each project fills the viewport, next slides over --}}
-    <div class="project-stack bg-offwhite">
+    <div class="project-stack relative -mt-24">
         @foreach ($projects as $project)
             <section class="sticky-scene" style="z-index: {{ 10 + $loop->index }}">
                 {{-- Background photo with slow ken-burns --}}
