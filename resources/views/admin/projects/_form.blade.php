@@ -29,7 +29,7 @@
                            class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 font-mono text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
                 </div>
 
-                <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Client</label>
                         <input type="text" name="client" value="{{ old('client', $project->client ?? '') }}"
@@ -38,6 +38,12 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Location</label>
                         <input type="text" name="location" value="{{ old('location', $project->location ?? '') }}"
+                               class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Project Size</label>
+                        <input type="text" name="project_size" value="{{ old('project_size', $project->project_size ?? '') }}"
+                               placeholder="Contoh: Trafo 1600 kVA / 20 kV"
                                class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
                     </div>
                     <div>

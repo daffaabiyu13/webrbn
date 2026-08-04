@@ -30,12 +30,14 @@
             <div class="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($projects as $project)
                     <article class="group flex flex-col overflow-hidden rounded-xl bg-white shadow-md ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                        @include('partials.skeleton-image', [
-                            'src' => $project->imageUrl(),
-                            'alt' => $project->translated('title'),
-                            'wrapClass' => 'relative aspect-[16/10] overflow-hidden bg-cream',
-                            'imgClass' => 'h-full w-full object-cover transition-transform duration-500 group-hover:scale-105',
-                        ])
+                        <a href="{{ route('projects.show', $project->slug) }}" class="block">
+                            @include('partials.skeleton-image', [
+                                'src' => $project->imageUrl(),
+                                'alt' => $project->translated('title'),
+                                'wrapClass' => 'relative aspect-[16/10] overflow-hidden bg-cream',
+                                'imgClass' => 'h-full w-full object-cover transition-transform duration-500 group-hover:scale-105',
+                            ])
+                        </a>
 
                         <div class="flex flex-1 flex-col p-5">
                             @if ($project->year || $project->location)
@@ -52,15 +54,25 @@
                                 </div>
                             @endif
 
-                            <h3 class="mt-3 text-lg font-bold text-[#1A1A1A] leading-snug">{{ $project->translated('title') }}</h3>
+                            <h3 class="mt-3 text-lg font-bold text-[#1A1A1A] leading-snug">
+                                <a href="{{ route('projects.show', $project->slug) }}" class="hover:text-primary transition-colors">
+                                    {{ $project->translated('title') }}
+                                </a>
+                            </h3>
 
                             @if ($project->client)
                                 <p class="mt-1 text-xs text-gray-500">Client: <span class="font-medium text-gray-700">{{ $project->client }}</span></p>
                             @endif
 
                             @if ($project->translated('short_description'))
-                                <p class="mt-3 text-sm text-gray-600 line-clamp-4">{{ $project->translated('short_description') }}</p>
+                                <p class="mt-3 text-sm text-gray-600 line-clamp-3">{{ $project->translated('short_description') }}</p>
                             @endif
+
+                            <a href="{{ route('projects.show', $project->slug) }}"
+                               class="mt-5 inline-flex items-center gap-2 self-start text-sm font-semibold text-primary hover:gap-3 transition-all">
+                                {{ __('site.projects.read_more') }}
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </a>
                         </div>
                     </article>
                 @endforeach

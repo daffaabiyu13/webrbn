@@ -30,6 +30,7 @@ class ProjectRequest extends FormRequest
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:' . $limit->maxKb()],
             'client' => ['nullable', 'string', 'max:255'],
             'location' => ['nullable', 'string', 'max:255'],
+            'project_size' => ['nullable', 'string', 'max:255'],
             'year' => ['nullable', 'integer', 'between:1900,2100'],
             'position' => ['nullable', 'integer', 'min:0'],
             'is_published' => ['sometimes', 'boolean'],

@@ -16,6 +16,14 @@ return [
         'subtitle' => 'Portfolio of projects we have delivered with clients across multiple industries.',
         'empty_title' => 'No projects yet',
         'empty_sub' => 'Our project portfolio is coming soon.',
+        'read_more' => 'Read More',
+        'breadcrumb_home' => 'Home',
+        'breadcrumb_projects' => 'Projects',
+        'meta_location' => 'Location',
+        'meta_size' => 'Project Size',
+        'meta_year' => 'Year',
+        'meta_client' => 'Client',
+        'related_title' => 'Other Projects',
     ],
 
     // Language switcher

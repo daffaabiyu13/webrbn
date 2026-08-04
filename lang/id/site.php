@@ -16,6 +16,14 @@ return [
         'subtitle' => 'Portofolio proyek yang telah kami kerjakan bersama klien dari berbagai industri.',
         'empty_title' => 'Belum ada proyek',
         'empty_sub' => 'Portofolio proyek akan segera hadir.',
+        'read_more' => 'Baca Selengkapnya',
+        'breadcrumb_home' => 'Beranda',
+        'breadcrumb_projects' => 'Proyek',
+        'meta_location' => 'Lokasi',
+        'meta_size' => 'Ukuran Proyek',
+        'meta_year' => 'Tahun',
+        'meta_client' => 'Klien',
+        'related_title' => 'Proyek Lainnya',
     ],
 
     // Language switcher
