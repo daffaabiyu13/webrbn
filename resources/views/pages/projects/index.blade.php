@@ -10,18 +10,18 @@
     .project-stack { position: relative; }
     .project-stack section.sticky-scene {
         position: sticky;
-        top: 5.5rem; /* below the 80px navbar with a small breathing gap */
-        height: calc(100vh - 7rem);
+        top: 5rem; /* sits directly below the 80px navbar */
+        height: calc(100vh - 5rem);
         min-height: 560px;
         overflow: hidden;
-        border-radius: 1.75rem; /* rounded-[1.75rem] ≈ rounded-3xl+ */
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+        /* Full-bleed, rounded on the top corners only */
+        border-radius: 2rem 2rem 0 0;
+        /* Upward shadow so each card reads as sliding over the previous */
+        box-shadow: 0 -20px 45px -12px rgba(0, 0, 0, 0.55);
     }
     @media (max-width: 640px) {
         .project-stack section.sticky-scene {
-            border-radius: 1.25rem;
-            top: 5rem;
-            height: calc(100vh - 6rem);
+            border-radius: 1.5rem 1.5rem 0 0;
             min-height: 520px;
         }
     }
@@ -60,9 +60,9 @@
 
 @if ($projects->isNotEmpty())
     {{-- Sticky-stack scroll: each project fills the viewport, next slides over --}}
-    <div class="project-stack bg-offwhite px-3 pt-4 pb-8 sm:px-6 sm:pb-12 lg:px-10">
+    <div class="project-stack bg-offwhite">
         @foreach ($projects as $project)
-            <section class="sticky-scene mx-auto max-w-[1400px]" style="z-index: {{ 10 + $loop->index }}">
+            <section class="sticky-scene" style="z-index: {{ 10 + $loop->index }}">
                 {{-- Background photo with slow ken-burns --}}
                 <div class="absolute inset-0 overflow-hidden">
                     <div class="absolute inset-0 bg-cover bg-center ken-burns"
