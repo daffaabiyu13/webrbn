@@ -2,6 +2,7 @@
     $navLinks = [
         ['label' => __('site.nav.home'), 'route' => 'home'],
         ['label' => __('site.nav.catalog'), 'route' => 'catalog.index'],
+        ['label' => __('site.nav.projects'), 'route' => 'projects.index'],
         ['label' => __('site.nav.about'), 'route' => 'about'],
     ];
     // Pages that don't start with a dark hero — force the header to its
@@ -39,7 +40,11 @@
             {{-- Desktop menu --}}
             <div class="hidden md:flex items-center gap-6">
                 @foreach ($navLinks as $link)
-                    @php $active = request()->routeIs($link['route']) || ($link['route'] === 'catalog.index' && request()->routeIs('catalog.*')); @endphp
+                    @php
+                        $active = request()->routeIs($link['route'])
+                            || ($link['route'] === 'catalog.index' && request()->routeIs('catalog.*'))
+                            || ($link['route'] === 'projects.index' && request()->routeIs('projects.*'));
+                    @endphp
                     <a href="{{ route($link['route']) }}"
                        class="relative text-sm font-medium transition-colors {{ $active ? 'text-white' : 'text-white/80 hover:text-white' }}">
                         {{ $link['label'] }}
@@ -80,7 +85,11 @@
         <div x-show="open" x-cloak x-transition class="md:hidden pb-4">
             <div class="flex flex-col gap-1">
                 @foreach ($navLinks as $link)
-                    @php $active = request()->routeIs($link['route']) || ($link['route'] === 'catalog.index' && request()->routeIs('catalog.*')); @endphp
+                    @php
+                        $active = request()->routeIs($link['route'])
+                            || ($link['route'] === 'catalog.index' && request()->routeIs('catalog.*'))
+                            || ($link['route'] === 'projects.index' && request()->routeIs('projects.*'));
+                    @endphp
                     <a href="{{ route($link['route']) }}"
                        class="rounded-md px-3 py-2 text-base font-medium {{ $active ? 'bg-white/10 text-white' : 'text-white/80 hover:bg-white/10 hover:text-white' }}">
                         {{ $link['label'] }}

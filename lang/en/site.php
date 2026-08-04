@@ -5,9 +5,39 @@ return [
     'nav' => [
         'home' => 'Home',
         'catalog' => 'Catalog',
+        'projects' => 'Projects',
         'about' => 'About',
         'contact' => 'Contact Us',
         'authorized_partner' => 'Authorized Schneider Partner',
+    ],
+
+    // Projects page
+    'projects' => [
+        'hero_label' => 'Portfolio',
+        'hero_title' => 'Projects We Have Delivered',
+        'hero_sub' => 'A track record of electrical and system-integration work PT. Radika Bintang Nusantara has completed for industrial partners across Indonesia.',
+        'list_label' => 'Highlights',
+        'list_title' => 'Selected Projects',
+        'list_lead' => 'Each project is executed with rigorous engineering, quality Schneider Electric components, and thorough commissioning supervision.',
+        'filter_all' => 'All',
+        'featured_badge' => 'Featured',
+        'card_cta' => 'View Details',
+        'empty' => 'No projects have been published yet.',
+        'cta_label' => 'Project Consultation',
+        'cta_title' => 'Planning a Similar Project?',
+        'cta_body' => 'Our team can help with load calculations, single-line design, and selecting the components that best fit your requirements.',
+        'cta_email' => 'Send Email',
+        // Detail page
+        'meta_title' => 'Project Details',
+        'meta_client' => 'Client',
+        'meta_location' => 'Location',
+        'meta_year' => 'Year',
+        'meta_category' => 'Segment',
+        'meta_cta' => 'Discuss a Similar Project',
+        'meta_inquiry' => 'Project inquiry: :title',
+        'related_label' => 'Related Projects',
+        'related_title' => 'Other Projects You Might Like',
+        'related_more' => 'All Projects',
     ],
 
     // Language switcher

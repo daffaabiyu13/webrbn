@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             AdminUserSeeder::class,
             SettingSeeder::class,
+            ProjectSeeder::class,
         ]);
     }
 }

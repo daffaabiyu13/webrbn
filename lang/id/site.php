@@ -5,9 +5,39 @@ return [
     'nav' => [
         'home' => 'Beranda',
         'catalog' => 'Katalog',
+        'projects' => 'Proyek',
         'about' => 'Tentang',
         'contact' => 'Hubungi Kami',
         'authorized_partner' => 'Authorized Schneider Partner',
+    ],
+
+    // Projects page
+    'projects' => [
+        'hero_label' => 'Portofolio',
+        'hero_title' => 'Proyek yang Kami Kerjakan',
+        'hero_sub' => 'Rekam jejak solusi kelistrikan dan integrasi sistem yang telah PT. Radika Bintang Nusantara serahkan kepada mitra industri di seluruh Indonesia.',
+        'list_label' => 'Highlight',
+        'list_title' => 'Proyek Pilihan',
+        'list_lead' => 'Setiap proyek dikerjakan dengan pendekatan engineering yang teliti, komponen berkualitas Schneider Electric, dan supervisi commissioning menyeluruh.',
+        'filter_all' => 'Semua',
+        'featured_badge' => 'Featured',
+        'card_cta' => 'Lihat Detail',
+        'empty' => 'Belum ada proyek yang dipublikasikan.',
+        'cta_label' => 'Diskusi Proyek',
+        'cta_title' => 'Ada Proyek Serupa yang Sedang Direncanakan?',
+        'cta_body' => 'Tim kami siap membantu perhitungan beban, desain single-line, dan pemilihan komponen yang paling sesuai dengan kebutuhan Anda.',
+        'cta_email' => 'Kirim Email',
+        // Detail page
+        'meta_title' => 'Detail Proyek',
+        'meta_client' => 'Klien',
+        'meta_location' => 'Lokasi',
+        'meta_year' => 'Tahun',
+        'meta_category' => 'Segmen',
+        'meta_cta' => 'Diskusikan Proyek Serupa',
+        'meta_inquiry' => 'Pertanyaan proyek: :title',
+        'related_label' => 'Proyek Terkait',
+        'related_title' => 'Proyek Lain yang Mungkin Menarik',
+        'related_more' => 'Semua Proyek',
     ],
 
     // Language switcher
