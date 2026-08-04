@@ -16,7 +16,6 @@ class SettingController extends Controller
     private const HERO_PAGES = [
         'home' => 'Home',
         'catalog' => 'Catalog',
-        'projects' => 'Projects',
         'about' => 'About',
     ];
 
