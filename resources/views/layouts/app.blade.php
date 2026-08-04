@@ -38,8 +38,30 @@
     </script>
     <style>
         [x-cloak] { display: none !important; }
-        .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+        .fade-up {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity .7s cubic-bezier(.2,.65,.3,1), transform .7s cubic-bezier(.2,.65,.3,1);
+            transition-delay: var(--reveal-delay, 0ms);
+            will-change: opacity, transform;
+        }
         .fade-up.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* Slide from side variants for overlapping sections */
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-48px);
+            transition: opacity .8s cubic-bezier(.2,.65,.3,1), transform .8s cubic-bezier(.2,.65,.3,1);
+            transition-delay: var(--reveal-delay, 0ms);
+        }
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(48px);
+            transition: opacity .8s cubic-bezier(.2,.65,.3,1), transform .8s cubic-bezier(.2,.65,.3,1);
+            transition-delay: var(--reveal-delay, 0ms);
+        }
+        .slide-in-left.is-visible,
+        .slide-in-right.is-visible { opacity: 1; transform: translateX(0); }
 
         /* Skeleton loaders */
         .skeleton {
@@ -98,7 +120,7 @@
                     }
                 });
             }, { threshold: 0.12 });
-            document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+            document.querySelectorAll('.fade-up, .slide-in-left, .slide-in-right').forEach((el) => observer.observe(el));
 
             // Top progress bar on same-origin link clicks
             const bar = document.getElementById('nav-progress');

@@ -29,7 +29,13 @@
         @if ($projects->isNotEmpty())
             <div class="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($projects as $project)
-                    <article class="group flex flex-col overflow-hidden rounded-xl bg-white shadow-md ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                    @php
+                        $col = $loop->index % 3;
+                        $slideClass = $col === 0 ? 'slide-in-left' : ($col === 2 ? 'slide-in-right' : 'fade-up');
+                        $delayMs = ($loop->index % 3) * 120 + ($loop->index >= 3 ? 60 : 0);
+                    @endphp
+                    <article class="group {{ $slideClass }} flex flex-col overflow-hidden rounded-xl bg-white shadow-md ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                             style="--reveal-delay: {{ $delayMs }}ms">
                         <a href="{{ route('projects.show', $project->slug) }}" class="block">
                             @include('partials.skeleton-image', [
                                 'src' => $project->imageUrl(),

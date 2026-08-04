@@ -24,29 +24,31 @@
     </div>
 </section>
 
-{{-- Metadata bar --}}
-<section class="bg-primary text-white">
+{{-- Metadata bar — floating card that overlaps the hero bottom edge --}}
+<section class="relative -mt-16 sm:-mt-20 z-10 fade-up">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <dl class="grid grid-cols-1 divide-y divide-white/15 sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
-            <div class="py-6 sm:px-6 text-center">
-                <dt class="text-xs font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_location') }}</dt>
-                <dd class="mt-2 text-lg font-bold sm:text-xl">{{ $project->location ?: '—' }}</dd>
-            </div>
-            <div class="py-6 sm:px-6 text-center">
-                <dt class="text-xs font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_size') }}</dt>
-                <dd class="mt-2 text-lg font-bold sm:text-xl">{{ $project->project_size ?: '—' }}</dd>
-            </div>
-            <div class="py-6 sm:px-6 text-center">
-                <dt class="text-xs font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_year') }}</dt>
-                <dd class="mt-2 text-lg font-bold sm:text-xl">{{ $project->year ?: '—' }}</dd>
-            </div>
-        </dl>
+        <div class="rounded-2xl bg-primary text-white shadow-2xl ring-1 ring-primary-dark/40">
+            <dl class="grid grid-cols-1 divide-y divide-white/15 sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
+                <div class="py-6 sm:px-6 text-center slide-in-left" style="--reveal-delay: 100ms">
+                    <dt class="text-xs font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_location') }}</dt>
+                    <dd class="mt-2 text-lg font-bold sm:text-xl">{{ $project->location ?: '—' }}</dd>
+                </div>
+                <div class="py-6 sm:px-6 text-center fade-up" style="--reveal-delay: 200ms">
+                    <dt class="text-xs font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_size') }}</dt>
+                    <dd class="mt-2 text-lg font-bold sm:text-xl">{{ $project->project_size ?: '—' }}</dd>
+                </div>
+                <div class="py-6 sm:px-6 text-center slide-in-right" style="--reveal-delay: 300ms">
+                    <dt class="text-xs font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_year') }}</dt>
+                    <dd class="mt-2 text-lg font-bold sm:text-xl">{{ $project->year ?: '—' }}</dd>
+                </div>
+            </dl>
+        </div>
     </div>
 </section>
 
-{{-- Content --}}
-<section class="bg-white py-16">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+{{-- Content — pulls up under the floating metadata card, no visible seam --}}
+<section class="relative bg-white pt-24 pb-16">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 fade-up">
         @if ($project->client)
             <div class="mb-8 flex items-center gap-3">
                 <span class="text-sm font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_client') }}</span>
@@ -68,7 +70,12 @@
 
             <div class="mt-8 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($related as $item)
-                    <article class="group flex flex-col overflow-hidden rounded-xl bg-white shadow-md ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                    @php
+                        $col = $loop->index % 3;
+                        $slideClass = $col === 0 ? 'slide-in-left' : ($col === 2 ? 'slide-in-right' : 'fade-up');
+                    @endphp
+                    <article class="group {{ $slideClass }} flex flex-col overflow-hidden rounded-xl bg-white shadow-md ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                             style="--reveal-delay: {{ $loop->index * 120 }}ms">
                         <a href="{{ route('projects.show', $item->slug) }}" class="block">
                             @include('partials.skeleton-image', [
                                 'src' => $item->imageUrl(),
