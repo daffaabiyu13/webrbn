@@ -5,17 +5,26 @@
 
 @push('head')
 <style>
-    /* Sticky scroll stack — each project section sticks at the top
-       and the next slides up over it. Higher z-index wins. */
-    .project-stack   { position: relative; }
+    /* Sticky scroll stack — each project section sticks below the
+       navbar and the next slides up over it. Higher z-index wins. */
+    .project-stack { position: relative; }
     .project-stack section.sticky-scene {
         position: sticky;
-        top: 0;
-        height: 100vh;
-        min-height: 640px;
+        top: 5.5rem; /* below the 80px navbar with a small breathing gap */
+        height: calc(100vh - 7rem);
+        min-height: 560px;
         overflow: hidden;
+        border-radius: 1.75rem; /* rounded-[1.75rem] ≈ rounded-3xl+ */
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
     }
-    /* Snap so scrolling settles neatly on each project. */
+    @media (max-width: 640px) {
+        .project-stack section.sticky-scene {
+            border-radius: 1.25rem;
+            top: 5rem;
+            height: calc(100vh - 6rem);
+            min-height: 520px;
+        }
+    }
     @media (min-width: 768px) {
         html { scroll-behavior: smooth; }
     }
@@ -51,9 +60,9 @@
 
 @if ($projects->isNotEmpty())
     {{-- Sticky-stack scroll: each project fills the viewport, next slides over --}}
-    <div class="project-stack bg-black">
+    <div class="project-stack bg-offwhite px-3 pt-4 pb-8 sm:px-6 sm:pb-12 lg:px-10">
         @foreach ($projects as $project)
-            <section class="sticky-scene" style="z-index: {{ 10 + $loop->index }}">
+            <section class="sticky-scene mx-auto max-w-[1400px]" style="z-index: {{ 10 + $loop->index }}">
                 {{-- Background photo with slow ken-burns --}}
                 <div class="absolute inset-0 overflow-hidden">
                     <div class="absolute inset-0 bg-cover bg-center ken-burns"
