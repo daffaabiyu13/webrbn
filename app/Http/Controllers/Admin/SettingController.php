@@ -33,7 +33,9 @@ class SettingController extends Controller
             ];
         }
 
-        return view('admin.settings.edit', compact('heroes'));
+        $certificate = Setting::get('certificate_image');
+
+        return view('admin.settings.edit', compact('heroes', 'certificate'));
     }
 
     public function updateHero(Request $request, string $page)
@@ -92,5 +94,43 @@ class SettingController extends Controller
         }
 
         return back()->with('status', "Hero {$pageLabel}: overlay tersimpan.");
+    }
+
+    public function updateCertificate(Request $request)
+    {
+        $limit = UploadLimit::forHeroBackground();
+        $human = $limit->human();
+
+        $request->validate([
+            'certificate_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:' . $limit->maxKb()],
+            'remove_certificate' => ['sometimes', 'boolean'],
+        ], [
+            'certificate_image.uploaded' => "Gambar gagal diunggah — kemungkinan besar file lebih besar dari batas server (max {$human}).",
+            'certificate_image.max' => "Ukuran gambar terlalu besar. Maksimal {$human}.",
+        ]);
+
+        $current = Setting::get('certificate_image');
+
+        if ($request->boolean('remove_certificate')) {
+            if ($current && ! str_starts_with($current, 'http')) {
+                Storage::disk('public')->delete($current);
+            }
+            Setting::set('certificate_image', null);
+
+            return back()->with('status', 'Sertifikat dihapus.');
+        }
+
+        if ($request->hasFile('certificate_image')) {
+            if ($current && ! str_starts_with($current, 'http')) {
+                Storage::disk('public')->delete($current);
+            }
+            $path = ImageCompressor::forHeroBackground()
+                ->storeCompressed($request->file('certificate_image'), 'public', 'settings');
+            Setting::set('certificate_image', $path);
+
+            return back()->with('status', 'Sertifikat berhasil diunggah.');
+        }
+
+        return back()->with('status', 'Tidak ada perubahan disimpan.');
     }
 }

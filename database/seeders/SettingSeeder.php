@@ -19,6 +19,7 @@ class SettingSeeder extends Seeder
             'hero_overlay_opacity_home' => '80',
             'hero_overlay_opacity_catalog' => '80',
             'hero_overlay_opacity_about' => '80',
+            'certificate_image' => null,
         ];
 
         foreach ($defaults as $key => $value) {

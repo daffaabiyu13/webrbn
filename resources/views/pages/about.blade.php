@@ -134,6 +134,19 @@
                 <p class="text-sm uppercase tracking-wider text-secondary">Schneider Electric</p>
                 <h3 class="mt-1 text-2xl font-bold">Authorized Partner</h3>
             </div>
+
+            @if (!empty($certificate))
+                <a href="{{ $certificate }}" target="_blank" rel="noopener" class="block bg-cream/40 px-4 py-6 transition-colors hover:bg-cream/70">
+                    @include('partials.skeleton-image', [
+                        'src' => $certificate,
+                        'alt' => __('site.about.cert_title'),
+                        'wrapClass' => 'relative overflow-hidden rounded-lg bg-white ring-1 ring-gray-200 max-w-3xl mx-auto',
+                        'imgClass' => 'w-full h-auto object-contain',
+                    ])
+                    <p class="mt-3 text-center text-xs text-gray-500">Klik untuk membuka gambar penuh</p>
+                </a>
+            @endif
+
             <div class="p-8">
                 <p class="text-lg font-semibold text-gray-800">{{ __('site.about.cert_partner_name') }}</p>
                 <p class="mt-1 text-gray-600">{{ __('site.about.cert_partner_role') }}</p>
