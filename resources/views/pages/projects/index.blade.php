@@ -3,97 +3,140 @@
 @section('title', __('site.projects.title'))
 @section('meta_description', __('site.projects.subtitle'))
 
+@push('head')
+<style>
+    /* Sticky scroll stack — each project section sticks at the top
+       and the next slides up over it. Higher z-index wins. */
+    .project-stack   { position: relative; }
+    .project-stack section.sticky-scene {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        min-height: 640px;
+        overflow: hidden;
+    }
+    /* Snap so scrolling settles neatly on each project. */
+    @media (min-width: 768px) {
+        html { scroll-behavior: smooth; }
+    }
+    /* Slow ken-burns on the hero image */
+    @keyframes kenburns {
+        0%, 100% { transform: scale(1.02); }
+        50%      { transform: scale(1.10); }
+    }
+    .ken-burns { animation: kenburns 20s ease-in-out infinite; }
+</style>
+@endpush
+
 @section('content')
 
-{{-- Page hero --}}
-<section class="relative flex h-[380px] -mt-20 items-center justify-center overflow-hidden pt-20">
-    @if (!empty($hero['background']))
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $hero['background'] }}');"></div>
-    @else
-        <div class="absolute inset-0 bg-gray-900"></div>
-    @endif
-    <div class="absolute inset-0" style="background-color: {{ $hero['overlay_rgba'] }};"></div>
-    <div class="relative text-center text-white px-4">
+{{-- Intro hero --}}
+<section class="relative flex h-[420px] -mt-20 items-end justify-center overflow-hidden pt-20">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-dark via-primary to-[#1a2a10]"></div>
+    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 25% 35%, #A5E17D 0, transparent 40%), radial-gradient(circle at 75% 65%, #A5E17D 0, transparent 40%);"></div>
+    <div class="relative text-center text-white px-4 pb-12">
         <h1 class="text-4xl font-extrabold sm:text-5xl">{{ __('site.projects.title') }}</h1>
-        <p class="mt-3 text-white/80 max-w-2xl mx-auto">{{ __('site.projects.subtitle') }}</p>
-        <nav class="mt-3 text-sm text-white/80">
-            <a href="{{ route('home') }}" class="hover:text-secondary">{{ __('site.catalog.breadcrumb_home') }}</a>
-            <span class="mx-2">/</span>
-            <span class="text-secondary">{{ __('site.projects.title') }}</span>
-        </nav>
+        <p class="mt-3 text-white/85 max-w-2xl mx-auto">{{ __('site.projects.subtitle') }}</p>
+        <div class="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-secondary">
+            <span>Scroll ke bawah</span>
+            <svg class="h-4 w-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </div>
     </div>
 </section>
 
-<section class="bg-white py-14">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        @if ($projects->isNotEmpty())
-            <div class="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
-                @foreach ($projects as $project)
-                    @php
-                        $col = $loop->index % 3;
-                        $slideClass = $col === 0 ? 'slide-in-left' : ($col === 2 ? 'slide-in-right' : 'fade-up');
-                        $delayMs = ($loop->index % 3) * 120 + ($loop->index >= 3 ? 60 : 0);
-                    @endphp
-                    <article class="group {{ $slideClass }} flex flex-col overflow-hidden rounded-xl bg-white shadow-md ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                             style="--reveal-delay: {{ $delayMs }}ms">
-                        <a href="{{ route('projects.show', $project->slug) }}" class="block">
-                            @include('partials.skeleton-image', [
-                                'src' => $project->imageUrl(),
-                                'alt' => $project->translated('title'),
-                                'wrapClass' => 'relative aspect-[16/10] overflow-hidden bg-cream',
-                                'imgClass' => 'h-full w-full object-cover transition-transform duration-500 group-hover:scale-105',
-                            ])
-                        </a>
+@if ($projects->isNotEmpty())
+    {{-- Sticky-stack scroll: each project fills the viewport, next slides over --}}
+    <div class="project-stack bg-black">
+        @foreach ($projects as $project)
+            <section class="sticky-scene" style="z-index: {{ 10 + $loop->index }}">
+                {{-- Background photo with slow ken-burns --}}
+                <div class="absolute inset-0 overflow-hidden">
+                    <div class="absolute inset-0 bg-cover bg-center ken-burns"
+                         style="background-image: url('{{ $project->imageUrl() }}');"></div>
+                </div>
 
-                        <div class="flex flex-1 flex-col p-5">
-                            @if ($project->year || $project->location)
-                                <div class="flex flex-wrap gap-2 text-[10px] uppercase tracking-wider text-gray-500">
-                                    @if ($project->year)
-                                        <span class="inline-flex items-center gap-1 rounded-full bg-secondary/15 px-2 py-0.5 font-semibold text-primary">{{ $project->year }}</span>
-                                    @endif
-                                    @if ($project->location)
-                                        <span class="inline-flex items-center gap-1 text-gray-500">
-                                            <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                            {{ $project->location }}
-                                        </span>
-                                    @endif
-                                </div>
-                            @endif
+                {{-- Dark gradient overlay for text readability --}}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/25"></div>
+                <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/60 to-transparent"></div>
 
-                            <h3 class="mt-3 text-lg font-bold text-[#1A1A1A] leading-snug">
-                                <a href="{{ route('projects.show', $project->slug) }}" class="hover:text-primary transition-colors">
-                                    {{ $project->translated('title') }}
-                                </a>
-                            </h3>
-
-                            @if ($project->client)
-                                <p class="mt-1 text-xs text-gray-500">Client: <span class="font-medium text-gray-700">{{ $project->client }}</span></p>
-                            @endif
-
-                            @if ($project->translated('short_description'))
-                                <p class="mt-3 text-sm text-gray-600 line-clamp-3">{{ $project->translated('short_description') }}</p>
-                            @endif
-
-                            <a href="{{ route('projects.show', $project->slug) }}"
-                               class="mt-5 inline-flex items-center gap-2 self-start text-sm font-semibold text-primary hover:gap-3 transition-all">
-                                {{ __('site.projects.read_more') }}
-                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </a>
+                {{-- Content --}}
+                <div class="relative flex h-full items-end">
+                    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 text-white">
+                        <div class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-secondary">
+                            <span class="inline-block h-px w-8 bg-secondary"></span>
+                            <span>{{ __('site.projects.title') }}</span>
+                            <span class="text-white/60">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }} / {{ str_pad((string) $projects->total(), 2, '0', STR_PAD_LEFT) }}</span>
                         </div>
-                    </article>
-                @endforeach
-            </div>
 
-            <div class="mt-12">
+                        <h2 class="mt-4 max-w-4xl text-3xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
+                            <a href="{{ route('projects.show', $project->slug) }}" class="hover:text-secondary transition-colors">
+                                {{ $project->translated('title') }}
+                            </a>
+                        </h2>
+
+                        <div class="mt-5 flex flex-wrap items-center gap-4 text-sm text-white/85">
+                            @if ($project->year)
+                                <span class="inline-flex items-center gap-1.5">
+                                    <svg class="h-4 w-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                    {{ $project->year }}
+                                </span>
+                            @endif
+                            @if ($project->location)
+                                <span class="inline-flex items-center gap-1.5">
+                                    <svg class="h-4 w-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                    {{ $project->location }}
+                                </span>
+                            @endif
+                            @if ($project->client)
+                                <span class="inline-flex items-center gap-1.5">
+                                    <svg class="h-4 w-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                    {{ $project->client }}
+                                </span>
+                            @endif
+                        </div>
+
+                        @if ($project->translated('short_description'))
+                            <p class="mt-6 max-w-2xl text-base text-white/85 sm:text-lg line-clamp-3">
+                                {{ $project->translated('short_description') }}
+                            </p>
+                        @endif
+
+                        <a href="{{ route('projects.show', $project->slug) }}"
+                           class="mt-8 inline-flex items-center gap-3 rounded-lg bg-white/10 backdrop-blur px-6 py-3.5 text-sm font-semibold text-white ring-1 ring-white/25 transition-all hover:bg-white hover:text-primary hover:gap-4">
+                            {{ __('site.projects.read_more') }}
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                {{-- Scroll cue for next project (not on last one) --}}
+                @if (! $loop->last)
+                    <div class="pointer-events-none absolute inset-x-0 bottom-4 z-10 flex justify-center text-white/70">
+                        <div class="flex flex-col items-center gap-1">
+                            <span class="text-[10px] uppercase tracking-widest">Project {{ $loop->iteration + 1 }}</span>
+                            <svg class="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                        </div>
+                    </div>
+                @endif
+            </section>
+        @endforeach
+    </div>
+
+    {{-- Pagination sits below the stack, on a clean surface --}}
+    @if ($projects->hasPages())
+        <section class="bg-white py-14">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {{ $projects->links() }}
             </div>
-        @else
-            <div class="rounded-2xl bg-cream p-16 text-center">
-                <p class="text-lg font-semibold text-gray-700">{{ __('site.projects.empty_title') }}</p>
-                <p class="mt-2 text-gray-500">{{ __('site.projects.empty_sub') }}</p>
-            </div>
-        @endif
-    </div>
-</section>
+        </section>
+    @endif
+@else
+    <section class="bg-white py-24">
+        <div class="mx-auto max-w-3xl rounded-2xl bg-cream p-16 text-center">
+            <p class="text-lg font-semibold text-gray-700">{{ __('site.projects.empty_title') }}</p>
+            <p class="mt-2 text-gray-500">{{ __('site.projects.empty_sub') }}</p>
+        </div>
+    </section>
+@endif
 
 @endsection
