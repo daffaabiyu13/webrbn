@@ -135,10 +135,10 @@
                 <h3 class="mt-1 text-2xl font-bold">Authorized Partner</h3>
             </div>
 
-            @if (!empty($certificate))
-                <a href="{{ $certificate }}" target="_blank" rel="noopener" class="block bg-cream/40 px-4 py-6 transition-colors hover:bg-cream/70">
+            @if (!empty($certificate['image']))
+                <a href="{{ $certificate['image'] }}" target="_blank" rel="noopener" class="block bg-cream/40 px-4 py-6 transition-colors hover:bg-cream/70">
                     @include('partials.skeleton-image', [
-                        'src' => $certificate,
+                        'src' => $certificate['image'],
                         'alt' => __('site.about.cert_title'),
                         'wrapClass' => 'relative overflow-hidden rounded-lg bg-white ring-1 ring-gray-200 max-w-3xl mx-auto',
                         'imgClass' => 'w-full h-auto object-contain',
@@ -150,10 +150,14 @@
             <div class="p-8">
                 <p class="text-lg font-semibold text-gray-800">{{ __('site.about.cert_partner_name') }}</p>
                 <p class="mt-1 text-gray-600">{{ __('site.about.cert_partner_role') }}</p>
-                <p class="mt-4 inline-flex items-center gap-2 rounded-lg bg-secondary/15 px-4 py-2 text-sm font-semibold text-primary">
-                    {{ __('site.about.cert_valid') }}
-                </p>
-                <p class="mt-5 text-sm text-gray-500">{{ __('site.about.cert_signed') }}</p>
+                @if (!empty($certificate['valid_text']))
+                    <p class="mt-4 inline-flex items-center gap-2 rounded-lg bg-secondary/15 px-4 py-2 text-sm font-semibold text-primary">
+                        {{ $certificate['valid_text'] }}
+                    </p>
+                @endif
+                @if (!empty($certificate['signed_text']))
+                    <p class="mt-5 text-sm text-gray-500">{{ $certificate['signed_text'] }}</p>
+                @endif
             </div>
         </div>
     </div>

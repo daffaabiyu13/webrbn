@@ -52,8 +52,8 @@
                     <img :src="preview" alt="Preview" class="w-full h-auto object-contain max-h-72 mx-auto">
                 </template>
                 <template x-if="!preview">
-                    @if ($certificate)
-                        <img src="{{ asset('storage/' . $certificate) }}" alt="Sertifikat saat ini" class="w-full h-auto object-contain max-h-72 mx-auto">
+                    @if ($certificate['image'])
+                        <img src="{{ asset('storage/' . $certificate['image']) }}" alt="Sertifikat saat ini" class="w-full h-auto object-contain max-h-72 mx-auto">
                     @else
                         <div class="flex h-56 items-center justify-center text-center text-xs text-gray-400 px-4">
                             Belum ada sertifikat. Pilih file di bawah untuk pratinjau.
@@ -68,7 +68,7 @@
             </p>
         </div>
 
-        <form method="POST" action="{{ route('admin.settings.certificate.update') }}" enctype="multipart/form-data" class="mt-5 space-y-3">
+        <form method="POST" action="{{ route('admin.settings.certificate.update') }}" enctype="multipart/form-data" class="mt-5 space-y-4">
             @csrf
 
             <div>
@@ -78,16 +78,33 @@
                 <p class="mt-1 text-xs text-gray-400">JPG/PNG/WebP. Otomatis dikompres. Batas server: <b>{{ $limit->human() }}</b>.</p>
             </div>
 
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Teks Masa Berlaku</label>
+                <input type="text" name="cert_valid_text" maxlength="500"
+                       value="{{ old('cert_valid_text', $certificate['valid_text']) }}"
+                       placeholder="Contoh: Berlaku 1 Januari 2026 s/d 31 Desember 2026"
+                       class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                <p class="mt-1 text-xs text-gray-400">Muncul sebagai badge hijau di kartu sertifikat.</p>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Teks Pengesahan / Signer</label>
+                <textarea name="cert_signed_text" rows="2" maxlength="1000"
+                          placeholder="Contoh: Disahkan oleh Tonny Hendro Kusumo — Industry Business Vice President, PT Schneider Indonesia."
+                          class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">{{ old('cert_signed_text', $certificate['signed_text']) }}</textarea>
+                <p class="mt-1 text-xs text-gray-400">Nama + jabatan + perusahaan yang menandatangani sertifikat.</p>
+            </div>
+
             <div class="flex flex-wrap gap-2 pt-1">
                 <button type="submit" class="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-dark">
                     Simpan
                 </button>
 
-                @if ($certificate)
+                @if ($certificate['image'])
                     <button type="submit" name="remove_certificate" value="1"
-                            onclick="return confirm('Hapus sertifikat?')"
+                            onclick="return confirm('Hapus gambar sertifikat? (Teks tetap tersimpan)')"
                             class="rounded-lg border border-red-300 px-4 py-2 text-sm font-semibold text-red-600 hover:bg-red-600 hover:text-white hover:border-red-600">
-                        Hapus Sertifikat
+                        Hapus Gambar
                     </button>
                 @endif
 

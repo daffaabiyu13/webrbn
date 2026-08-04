@@ -33,7 +33,11 @@ class SettingController extends Controller
             ];
         }
 
-        $certificate = Setting::get('certificate_image');
+        $certificate = [
+            'image' => Setting::get('certificate_image'),
+            'valid_text' => Setting::get('cert_valid_text', ''),
+            'signed_text' => Setting::get('cert_signed_text', ''),
+        ];
 
         return view('admin.settings.edit', compact('heroes', 'certificate'));
     }
@@ -101,14 +105,21 @@ class SettingController extends Controller
         $limit = UploadLimit::forHeroBackground();
         $human = $limit->human();
 
-        $request->validate([
+        $data = $request->validate([
             'certificate_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:' . $limit->maxKb()],
             'remove_certificate' => ['sometimes', 'boolean'],
+            'cert_valid_text' => ['nullable', 'string', 'max:500'],
+            'cert_signed_text' => ['nullable', 'string', 'max:1000'],
         ], [
             'certificate_image.uploaded' => "Gambar gagal diunggah — kemungkinan besar file lebih besar dari batas server (max {$human}).",
             'certificate_image.max' => "Ukuran gambar terlalu besar. Maksimal {$human}.",
         ]);
 
+        // Text fields — always saved on submit, independent from image
+        Setting::set('cert_valid_text', trim((string) ($data['cert_valid_text'] ?? '')));
+        Setting::set('cert_signed_text', trim((string) ($data['cert_signed_text'] ?? '')));
+
+        // Image handling
         $current = Setting::get('certificate_image');
 
         if ($request->boolean('remove_certificate')) {
@@ -117,7 +128,7 @@ class SettingController extends Controller
             }
             Setting::set('certificate_image', null);
 
-            return back()->with('status', 'Sertifikat dihapus.');
+            return back()->with('status', 'Sertifikat: gambar dihapus, teks tersimpan.');
         }
 
         if ($request->hasFile('certificate_image')) {
@@ -128,9 +139,9 @@ class SettingController extends Controller
                 ->storeCompressed($request->file('certificate_image'), 'public', 'settings');
             Setting::set('certificate_image', $path);
 
-            return back()->with('status', 'Sertifikat berhasil diunggah.');
+            return back()->with('status', 'Sertifikat diperbarui (gambar & teks).');
         }
 
-        return back()->with('status', 'Tidak ada perubahan disimpan.');
+        return back()->with('status', 'Teks sertifikat tersimpan.');
     }
 }

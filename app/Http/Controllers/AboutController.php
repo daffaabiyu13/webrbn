@@ -11,10 +11,16 @@ class AboutController extends Controller
     {
         $hero = HeroStyle::forPage('about');
 
-        $certificate = Setting::get('certificate_image');
-        if ($certificate && ! str_starts_with($certificate, 'http')) {
-            $certificate = asset('storage/' . $certificate);
+        $certImage = Setting::get('certificate_image');
+        if ($certImage && ! str_starts_with($certImage, 'http')) {
+            $certImage = asset('storage/' . $certImage);
         }
+
+        $certificate = [
+            'image' => $certImage,
+            'valid_text' => Setting::get('cert_valid_text') ?: __('site.about.cert_valid'),
+            'signed_text' => Setting::get('cert_signed_text') ?: __('site.about.cert_signed'),
+        ];
 
         return view('pages.about', compact('hero', 'certificate'));
     }

@@ -20,6 +20,8 @@ class SettingSeeder extends Seeder
             'hero_overlay_opacity_catalog' => '80',
             'hero_overlay_opacity_about' => '80',
             'certificate_image' => null,
+            'cert_valid_text' => 'Berlaku 1 Januari 2026 s/d 31 Desember 2026',
+            'cert_signed_text' => 'Disahkan oleh Tonny Hendro Kusumo — Industry Business Vice President, PT Schneider Indonesia.',
         ];
 
         foreach ($defaults as $key => $value) {
