@@ -30,10 +30,15 @@
 
 @section('content')
 
-{{-- Intro hero --}}
+{{-- Intro hero (image + overlay editable via /admin/settings) --}}
 <section class="relative flex h-[420px] -mt-20 items-end justify-center overflow-hidden pt-20">
-    <div class="absolute inset-0 bg-gradient-to-br from-primary-dark via-primary to-[#1a2a10]"></div>
-    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 25% 35%, #A5E17D 0, transparent 40%), radial-gradient(circle at 75% 65%, #A5E17D 0, transparent 40%);"></div>
+    @if (!empty($hero['background']))
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $hero['background'] }}');"></div>
+    @else
+        <div class="absolute inset-0 bg-gray-900"></div>
+    @endif
+    <div class="absolute inset-0" style="background-color: {{ $hero['overlay_rgba'] }};"></div>
+
     <div class="relative text-center text-white px-4 pb-12">
         <h1 class="text-4xl font-extrabold sm:text-5xl">{{ __('site.projects.title') }}</h1>
         <p class="mt-3 text-white/85 max-w-2xl mx-auto">{{ __('site.projects.subtitle') }}</p>

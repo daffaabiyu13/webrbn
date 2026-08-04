@@ -15,7 +15,7 @@ class ProjectController extends Controller
             ->orderByDesc('id')
             ->paginate(9);
 
-        $hero = HeroStyle::forPage('about');
+        $hero = HeroStyle::forPage('projects');
 
         return view('pages.projects.index', compact('projects', 'hero'));
     }
