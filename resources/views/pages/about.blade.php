@@ -86,7 +86,7 @@
                     ['NIB', '1003250060023'],
                     ['NPWP', '1000 0000 0073 4477'],
                     [__('site.about.data_email'), 'pt.radikabintang@gmail.com'],
-                    [__('site.about.data_phone'), '+62 82 123 345 758, +62 853-3033-0396'],
+                    [__('site.about.data_phone'), '+62 82 123 345 758, +62 853 3033 0396'],
                 ] as $row)
                     <div class="grid grid-cols-1 gap-1 px-6 py-4 sm:grid-cols-3 sm:gap-4">
                         <dt class="text-sm font-semibold text-gray-700">{{ $row[0] }}</dt>
