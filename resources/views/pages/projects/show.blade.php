@@ -6,15 +6,15 @@
 @section('content')
 
 {{-- Hero with project image --}}
-<section class="relative flex min-h-[520px] -mt-20 items-end overflow-hidden pt-20">
+<section class="relative flex min-h-[420px] sm:min-h-[520px] -mt-20 items-end overflow-hidden pt-20">
     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $project->imageUrl() }}');"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/25"></div>
 
-    <div class="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-14 pt-24 text-white">
-        <h1 class="text-3xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
+    <div class="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-14 pt-20 sm:pt-24 text-white">
+        <h1 class="text-2xl font-extrabold leading-tight sm:text-4xl md:text-5xl lg:text-6xl">
             {{ $project->translated('title') }}
         </h1>
-        <nav class="mt-4 text-sm text-white/80">
+        <nav class="mt-3 sm:mt-4 flex flex-wrap items-center text-xs sm:text-sm text-white/80">
             <a href="{{ route('home') }}" class="hover:text-secondary">{{ __('site.projects.breadcrumb_home') }}</a>
             <span class="mx-2">•</span>
             <a href="{{ route('projects.index') }}" class="hover:text-secondary">{{ __('site.projects.breadcrumb_projects') }}</a>
@@ -25,21 +25,21 @@
 </section>
 
 {{-- Metadata bar — floating card that overlaps the hero bottom edge --}}
-<section class="relative -mt-16 sm:-mt-20 z-10 fade-up">
+<section class="relative -mt-10 sm:-mt-16 lg:-mt-20 z-10 fade-up">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="rounded-2xl bg-primary text-white shadow-2xl ring-1 ring-primary-dark/40">
             <dl class="grid grid-cols-1 divide-y divide-white/15 sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
-                <div class="py-6 sm:px-6 text-center slide-in-left" style="--reveal-delay: 100ms">
-                    <dt class="text-xs font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_location') }}</dt>
-                    <dd class="mt-2 text-lg font-bold sm:text-xl">{{ $project->location ?: '—' }}</dd>
+                <div class="py-4 px-4 sm:py-6 sm:px-6 text-center slide-in-left" style="--reveal-delay: 100ms">
+                    <dt class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_location') }}</dt>
+                    <dd class="mt-1.5 sm:mt-2 text-base sm:text-lg lg:text-xl font-bold">{{ $project->location ?: '—' }}</dd>
                 </div>
-                <div class="py-6 sm:px-6 text-center fade-up" style="--reveal-delay: 200ms">
-                    <dt class="text-xs font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_size') }}</dt>
-                    <dd class="mt-2 text-lg font-bold sm:text-xl">{{ $project->project_size ?: '—' }}</dd>
+                <div class="py-4 px-4 sm:py-6 sm:px-6 text-center fade-up" style="--reveal-delay: 200ms">
+                    <dt class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_size') }}</dt>
+                    <dd class="mt-1.5 sm:mt-2 text-base sm:text-lg lg:text-xl font-bold">{{ $project->project_size ?: '—' }}</dd>
                 </div>
-                <div class="py-6 sm:px-6 text-center slide-in-right" style="--reveal-delay: 300ms">
-                    <dt class="text-xs font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_year') }}</dt>
-                    <dd class="mt-2 text-lg font-bold sm:text-xl">{{ $project->year ?: '—' }}</dd>
+                <div class="py-4 px-4 sm:py-6 sm:px-6 text-center slide-in-right" style="--reveal-delay: 300ms">
+                    <dt class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_year') }}</dt>
+                    <dd class="mt-1.5 sm:mt-2 text-base sm:text-lg lg:text-xl font-bold">{{ $project->year ?: '—' }}</dd>
                 </div>
             </dl>
         </div>
@@ -47,16 +47,16 @@
 </section>
 
 {{-- Content — pulls up under the floating metadata card, no visible seam --}}
-<section class="relative bg-white pt-24 pb-16">
+<section class="relative bg-white pt-16 sm:pt-24 pb-12 sm:pb-16">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 fade-up">
         @if ($project->client)
-            <div class="mb-8 flex items-center gap-3">
-                <span class="text-sm font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_client') }}</span>
-                <span class="text-lg font-bold text-primary">{{ $project->client }}</span>
+            <div class="mb-6 sm:mb-8 flex flex-wrap items-center gap-2 sm:gap-3">
+                <span class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-secondary">{{ __('site.projects.meta_client') }}</span>
+                <span class="text-base sm:text-lg font-bold text-primary">{{ $project->client }}</span>
             </div>
         @endif
 
-        <div class="prose max-w-none text-gray-700 leading-relaxed [&_p]:mb-4 [&_strong]:text-gray-900">
+        <div class="prose prose-sm sm:prose-base max-w-none text-gray-700 leading-relaxed [&_p]:mb-4 [&_strong]:text-gray-900">
             {!! $project->formattedDescription() !!}
         </div>
     </div>
@@ -64,11 +64,11 @@
 
 {{-- Related projects --}}
 @if ($related->isNotEmpty())
-    <section class="bg-offwhite py-16">
+    <section class="bg-offwhite py-12 sm:py-16">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-[#1A1A1A] sm:text-3xl">{{ __('site.projects.related_title') }}</h2>
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-[#1A1A1A]">{{ __('site.projects.related_title') }}</h2>
 
-            <div class="mt-8 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="mt-6 sm:mt-8 grid grid-cols-1 gap-5 sm:gap-7 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($related as $item)
                     @php
                         $col = $loop->index % 3;
