@@ -19,24 +19,26 @@
         /* Upward shadow so each card reads as sliding over the previous */
         box-shadow: 0 -20px 45px -12px rgba(0, 0, 0, 0.55);
     }
-    /* Intro scene has no rounded top since it's the first surface the user sees.
-       Slightly shorter than 100vh so the first project peeks up from the bottom,
-       hinting that more content lives below. */
+    /* Intro scene has no rounded top since it's the first surface the user sees */
     .project-stack section.sticky-scene.is-intro {
         border-radius: 0;
         box-shadow: none;
-        height: 88vh;
-        min-height: 520px;
+    }
+    /* Pull the first project scene up slightly so its rounded top peeks over
+       the bottom of the full-height intro hero — a small affordance that
+       hints there's more content below. The scene still snaps to top:0
+       once the user scrolls, so the stack behavior is unchanged. */
+    .project-stack section.sticky-scene.is-intro + .sticky-scene {
+        margin-top: -12vh;
     }
     @media (max-width: 640px) {
         .project-stack section.sticky-scene {
             border-radius: 1.5rem 1.5rem 0 0;
             min-height: 560px;
         }
-        .project-stack section.sticky-scene.is-intro {
-            border-radius: 0;
-            height: 85vh;
-            min-height: 480px;
+        .project-stack section.sticky-scene.is-intro { border-radius: 0; }
+        .project-stack section.sticky-scene.is-intro + .sticky-scene {
+            margin-top: -10vh;
         }
     }
     @media (min-width: 768px) {

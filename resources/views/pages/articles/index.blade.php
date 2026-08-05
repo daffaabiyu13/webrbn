@@ -17,23 +17,25 @@
         border-radius: 2rem 2rem 0 0;
         box-shadow: 0 -20px 45px -12px rgba(0, 0, 0, 0.55);
     }
-    /* Intro is a bit shorter than the viewport so the first article peeks
-       up from the bottom, hinting there's more below. */
     .article-stack section.sticky-scene.is-intro {
         border-radius: 0;
         box-shadow: none;
-        height: 88vh;
-        min-height: 520px;
+    }
+    /* Pull the first article scene up slightly so its rounded top peeks over
+       the bottom of the full-height intro hero — a small affordance that
+       hints there's more content below. The scene still snaps to top:0
+       once the user scrolls, so the stack behavior is unchanged. */
+    .article-stack section.sticky-scene.is-intro + .sticky-scene {
+        margin-top: -12vh;
     }
     @media (max-width: 640px) {
         .article-stack section.sticky-scene {
             border-radius: 1.5rem 1.5rem 0 0;
             min-height: 560px;
         }
-        .article-stack section.sticky-scene.is-intro {
-            border-radius: 0;
-            height: 85vh;
-            min-height: 480px;
+        .article-stack section.sticky-scene.is-intro { border-radius: 0; }
+        .article-stack section.sticky-scene.is-intro + .sticky-scene {
+            margin-top: -10vh;
         }
     }
     @media (min-width: 768px) {
