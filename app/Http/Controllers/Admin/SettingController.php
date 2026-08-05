@@ -17,6 +17,7 @@ class SettingController extends Controller
         'home' => 'Home',
         'catalog' => 'Catalog',
         'projects' => 'Projects',
+        'articles' => 'Articles',
         'about' => 'About',
     ];
 

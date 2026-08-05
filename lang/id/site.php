@@ -6,6 +6,7 @@ return [
         'home' => 'Beranda',
         'catalog' => 'Katalog',
         'projects' => 'Proyek',
+        'articles' => 'Artikel',
         'about' => 'Tentang',
         'contact' => 'Hubungi Kami',
         'authorized_partner' => 'Authorized Schneider Partner',
@@ -24,6 +25,14 @@ return [
         'meta_year' => 'Tahun',
         'meta_client' => 'Klien',
         'related_title' => 'Proyek Lainnya',
+    ],
+
+    'articles' => [
+        'title' => 'Artikel',
+        'subtitle' => 'Kumpulan artikel, publikasi, dan berita terkait aktivitas kami.',
+        'empty_title' => 'Belum ada artikel',
+        'empty_sub' => 'Artikel akan segera hadir.',
+        'read_more' => 'Baca Selengkapnya',
     ],
 
     // Language switcher

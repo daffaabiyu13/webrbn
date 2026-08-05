@@ -6,6 +6,7 @@ return [
         'home' => 'Home',
         'catalog' => 'Catalog',
         'projects' => 'Projects',
+        'articles' => 'Articles',
         'about' => 'About',
         'contact' => 'Contact Us',
         'authorized_partner' => 'Authorized Schneider Partner',
@@ -24,6 +25,14 @@ return [
         'meta_year' => 'Year',
         'meta_client' => 'Client',
         'related_title' => 'Other Projects',
+    ],
+
+    'articles' => [
+        'title' => 'Articles',
+        'subtitle' => 'Curated articles, publications, and news about our work.',
+        'empty_title' => 'No articles yet',
+        'empty_sub' => 'Articles will be published here soon.',
+        'read_more' => 'Read More',
     ],
 
     // Language switcher
