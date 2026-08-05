@@ -36,7 +36,7 @@
                         </svg>
                         <span class="flex flex-col gap-0.5">
                             <a href="tel:+6282123345758" class="hover:text-secondary">+62 82 123 345 758</a>
-                            <a href="tel:+6285330330396" class="hover:text-secondary">+62 853 3033 0396</a>
+                            <a href="tel:+6285330330396" class="hover:text-secondary">+62 85 330 330 396</a>
                         </span>
                     </li>
                     <li class="flex items-start gap-2.5">
