@@ -17,16 +17,24 @@
         border-radius: 2rem 2rem 0 0;
         box-shadow: 0 -20px 45px -12px rgba(0, 0, 0, 0.55);
     }
+    /* Intro is a bit shorter than the viewport so the first article peeks
+       up from the bottom, hinting there's more below. */
     .article-stack section.sticky-scene.is-intro {
         border-radius: 0;
         box-shadow: none;
+        height: 88vh;
+        min-height: 520px;
     }
     @media (max-width: 640px) {
         .article-stack section.sticky-scene {
             border-radius: 1.5rem 1.5rem 0 0;
             min-height: 560px;
         }
-        .article-stack section.sticky-scene.is-intro { border-radius: 0; }
+        .article-stack section.sticky-scene.is-intro {
+            border-radius: 0;
+            height: 85vh;
+            min-height: 480px;
+        }
     }
     @media (min-width: 768px) {
         html { scroll-behavior: smooth; }
