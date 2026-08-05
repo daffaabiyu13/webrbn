@@ -174,7 +174,7 @@ return [
         'contact' => 'Contact',
         'partners' => 'Brand Partners',
         'address' => 'Taman Puspa Anggaswangi Blok P1-12 Sukodono, Sidoarjo, East Java 61258',
-        'branch' => 'Kalimantan Branch: Jl. Makmur, Graha Permata Indah No.59, Banjarbaru',
+        'branch' => 'Kalimantan Branch: Jl. Makmur, Graha Permata Indah No.59, Banjarbaru, South Kalimantan',
         'copyright' => 'Copyright © 2025 PT. Radika Bintang Nusantara. All rights reserved.',
     ],
 ];
