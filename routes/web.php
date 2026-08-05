@@ -45,9 +45,5 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('projects', AdminProjectController::class)->except(['show']);
     Route::resource('articles', AdminArticleController::class)->except(['show']);
     Route::get('/settings', [AdminSettingController::class, 'edit'])->name('settings.edit');
-    Route::post('/settings/hero/{page}', [AdminSettingController::class, 'updateHero'])
-        ->whereIn('page', ['home', 'catalog', 'projects', 'articles', 'about'])
-        ->name('settings.hero.update');
-    Route::post('/settings/certificate', [AdminSettingController::class, 'updateCertificate'])
-        ->name('settings.certificate.update');
+    Route::post('/settings', [AdminSettingController::class, 'saveAll'])->name('settings.save');
 });
