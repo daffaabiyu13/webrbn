@@ -85,8 +85,15 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/25"></div>
                 <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/60 to-transparent"></div>
 
-                {{-- Content --}}
-                <div class="relative flex h-full items-end">
+                {{-- Full-scene link to article detail. Any click on the scene (except the
+                     "Baca Selengkapnya" button, which has higher z-index) navigates here. --}}
+                <a href="{{ route('articles.show', $article->slug) }}"
+                   class="absolute inset-0 z-[5]"
+                   aria-label="{{ __('site.articles.view_detail') }}: {{ $article->translated('title') }}"></a>
+
+                {{-- Content — pointer-events pass through to the link overlay above,
+                     the read-more CTA re-enables pointer events for itself. --}}
+                <div class="relative flex h-full items-end pointer-events-none">
                     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 text-white">
                         <div class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-secondary">
                             <span class="inline-block h-px w-8 bg-secondary"></span>
@@ -95,13 +102,7 @@
                         </div>
 
                         <h2 class="mt-4 max-w-4xl text-3xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
-                            @if ($article->url)
-                                <a href="{{ $article->url }}" target="_blank" rel="noopener" class="hover:text-secondary transition-colors">
-                                    {{ $article->translated('title') }}
-                                </a>
-                            @else
-                                {{ $article->translated('title') }}
-                            @endif
+                            {{ $article->translated('title') }}
                         </h2>
 
                         <div class="mt-5 flex flex-wrap items-center gap-4 text-sm text-white/85">
@@ -133,7 +134,7 @@
 
                         @if ($article->url)
                             <a href="{{ $article->url }}" target="_blank" rel="noopener"
-                               class="mt-8 inline-flex items-center gap-3 rounded-lg bg-white/10 backdrop-blur px-6 py-3.5 text-sm font-semibold text-white ring-1 ring-white/25 transition-all hover:bg-white hover:text-primary hover:gap-4">
+                               class="pointer-events-auto relative z-20 mt-8 inline-flex items-center gap-3 rounded-lg bg-white/10 backdrop-blur px-6 py-3.5 text-sm font-semibold text-white ring-1 ring-white/25 transition-all hover:bg-white hover:text-primary hover:gap-4">
                                 {{ __('site.articles.read_more') }}
                                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                             </a>

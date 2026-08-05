@@ -33,6 +33,15 @@ return [
         'empty_title' => 'No articles yet',
         'empty_sub' => 'Articles will be published here soon.',
         'read_more' => 'Read More',
+        'view_detail' => 'View Detail',
+        'external_link' => 'Open Source Link',
+        'breadcrumb_home' => 'Home',
+        'breadcrumb_articles' => 'Articles',
+        'meta_location' => 'Location',
+        'meta_size' => 'Size',
+        'meta_year' => 'Year',
+        'meta_client' => 'Client',
+        'related_title' => 'Other Articles',
     ],
 
     // Language switcher

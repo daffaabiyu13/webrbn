@@ -33,6 +33,15 @@ return [
         'empty_title' => 'Belum ada artikel',
         'empty_sub' => 'Artikel akan segera hadir.',
         'read_more' => 'Baca Selengkapnya',
+        'view_detail' => 'Lihat Detail',
+        'external_link' => 'Buka Tautan Sumber',
+        'breadcrumb_home' => 'Beranda',
+        'breadcrumb_articles' => 'Artikel',
+        'meta_location' => 'Lokasi',
+        'meta_size' => 'Ukuran',
+        'meta_year' => 'Tahun',
+        'meta_client' => 'Klien',
+        'related_title' => 'Artikel Lainnya',
     ],
 
     // Language switcher

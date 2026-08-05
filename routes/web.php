@@ -26,6 +26,7 @@ Route::get('/catalog/{slug}', [CatalogController::class, 'show'])->name('catalog
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projects.show');
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/placeholder.svg', [PlaceholderController::class, 'svg'])->name('placeholder');
 

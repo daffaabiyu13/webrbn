@@ -19,4 +19,20 @@ class ArticleController extends Controller
 
         return view('pages.articles.index', compact('articles', 'hero'));
     }
+
+    public function show(string $slug)
+    {
+        $article = Article::where('slug', $slug)
+            ->where('is_published', true)
+            ->firstOrFail();
+
+        $related = Article::where('is_published', true)
+            ->where('id', '!=', $article->id)
+            ->orderBy('position')
+            ->orderByDesc('year')
+            ->take(3)
+            ->get();
+
+        return view('pages.articles.show', compact('article', 'related'));
+    }
 }
