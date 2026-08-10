@@ -25,5 +25,5 @@
 @endphp
 
 <div class="flex flex-none items-center justify-center overflow-hidden shadow-sm ring-1 ring-black/5 {{ $wrapBg }} {{ $sizeClass }} {{ $wrapClass }}">
-    <img src="{{ $logoUrl }}" alt="PT. Radika Bintang Nusantara" class="h-full w-full object-contain p-1">
+    <img src="{{ $logoUrl }}" alt="PT. Radika Bintang Nusantara" class="h-full w-full object-contain scale-125">
 </div>
