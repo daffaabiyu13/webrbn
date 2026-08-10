@@ -102,6 +102,7 @@
                         __('site.home.highlight_2'),
                         __('site.home.highlight_3'),
                         __('site.home.highlight_4'),
+                        __('site.home.highlight_5'),
                     ] as $point)
                         <li class="flex items-start gap-3">
                             <span class="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-secondary/15 text-primary">
