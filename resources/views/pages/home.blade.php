@@ -5,8 +5,11 @@
 
 @section('content')
 
-{{-- SECTION 1: HERO --}}
-<section class="relative flex flex-col min-h-[90vh] -mt-20 overflow-hidden">
+{{-- SECTION 1: HERO — fills the viewport exactly. The 5rem extra accounts
+     for the -mt-20 bleed under the sticky navbar, so the stat strip lands
+     right at the fold instead of below it. 100dvh handles mobile URL bars. --}}
+<section class="relative flex flex-col -mt-20 overflow-hidden"
+         style="min-height: calc(100vh + 5rem); min-height: calc(100dvh + 5rem);">
     @if (!empty($hero['background']))
         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $hero['background'] }}');"></div>
     @else
@@ -16,7 +19,7 @@
 
     {{-- Main content — flex-1 so it fills remaining space above stats --}}
     <div class="relative flex flex-1 items-center">
-        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pt-32 pb-16 sm:pt-40 sm:pb-24 text-center text-white">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pt-24 pb-8 sm:pt-32 sm:pb-16 text-center text-white">
             <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs sm:text-sm font-medium ring-1 ring-white/20 backdrop-blur">
                 <svg class="h-4 w-4 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.3 3.29 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd"/></svg>
                 Authorized Schneider Electric Partner
