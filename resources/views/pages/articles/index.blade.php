@@ -131,13 +131,11 @@
                             </p>
                         @endif
 
-                        @if ($article->url)
-                            <a href="{{ $article->url }}" target="_blank" rel="noopener"
-                               class="pointer-events-auto relative z-20 mt-6 sm:mt-8 inline-flex items-center gap-2 sm:gap-3 rounded-lg bg-white/10 backdrop-blur px-5 sm:px-6 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold text-white ring-1 ring-white/25 transition-all hover:bg-white hover:text-primary hover:gap-4">
-                                {{ __('site.articles.read_more') }}
-                                <svg class="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                            </a>
-                        @endif
+                        <a href="{{ route('articles.show', $article->slug) }}"
+                           class="pointer-events-auto relative z-20 mt-6 sm:mt-8 inline-flex items-center gap-2 sm:gap-3 rounded-lg bg-white/10 backdrop-blur px-5 sm:px-6 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold text-white ring-1 ring-white/25 transition-all hover:bg-white hover:text-primary hover:gap-4">
+                            {{ __('site.articles.read_more') }}
+                            <svg class="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </a>
                     </div>
                 </div>
 
