@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Article extends Model
 {
@@ -14,11 +15,7 @@ class Article extends Model
         'short_description_en',
         'description',
         'description_en',
-        'image',
         'url',
-        'client',
-        'location',
-        'project_size',
         'year',
         'position',
         'is_published',
@@ -48,12 +45,21 @@ class Article extends Model
         return 'slug';
     }
 
+    public function images(): HasMany
+    {
+        return $this->hasMany(ArticleImage::class)->orderBy('position')->orderBy('id');
+    }
+
+    public function primaryImage(): ?ArticleImage
+    {
+        return $this->images->first();
+    }
+
     public function imageUrl(): string
     {
-        if ($this->image) {
-            return str_starts_with($this->image, 'http')
-                ? $this->image
-                : asset('storage/' . $this->image);
+        $primary = $this->primaryImage();
+        if ($primary) {
+            return $primary->url();
         }
 
         return route('placeholder', ['name' => $this->title]);

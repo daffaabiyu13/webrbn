@@ -9,7 +9,8 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::where('is_published', true)
+        $projects = Project::with('images')
+            ->where('is_published', true)
             ->orderBy('position')
             ->orderByDesc('year')
             ->orderByDesc('id')
@@ -22,11 +23,13 @@ class ProjectController extends Controller
 
     public function show(string $slug)
     {
-        $project = Project::where('slug', $slug)
+        $project = Project::with('images')
+            ->where('slug', $slug)
             ->where('is_published', true)
             ->firstOrFail();
 
-        $related = Project::where('is_published', true)
+        $related = Project::with('images')
+            ->where('is_published', true)
             ->where('id', '!=', $project->id)
             ->orderBy('position')
             ->orderByDesc('year')

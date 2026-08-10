@@ -9,7 +9,8 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::where('is_published', true)
+        $articles = Article::with('images')
+            ->where('is_published', true)
             ->orderBy('position')
             ->orderByDesc('year')
             ->orderByDesc('id')
@@ -22,11 +23,13 @@ class ArticleController extends Controller
 
     public function show(string $slug)
     {
-        $article = Article::where('slug', $slug)
+        $article = Article::with('images')
+            ->where('slug', $slug)
             ->where('is_published', true)
             ->firstOrFail();
 
-        $related = Article::where('is_published', true)
+        $related = Article::with('images')
+            ->where('is_published', true)
             ->where('id', '!=', $article->id)
             ->orderBy('position')
             ->orderByDesc('year')

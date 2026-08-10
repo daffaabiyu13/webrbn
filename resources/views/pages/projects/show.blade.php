@@ -46,8 +46,72 @@
     </div>
 </section>
 
+{{-- Gallery carousel — only render when the project has images. Alpine drives
+     active-slide + thumbnail sync; keyboard arrows work when the page is focused. --}}
+@php
+    $gallery = $project->images->map(fn ($img) => ['url' => $img->url()])->values()->all();
+@endphp
+@if (!empty($gallery))
+    <section class="relative bg-white pt-16 sm:pt-20 fade-up">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8"
+             x-data="{
+                active: 0,
+                images: {{ Illuminate\Support\Js::from($gallery) }},
+                next() { this.active = (this.active + 1) % this.images.length; },
+                prev() { this.active = (this.active - 1 + this.images.length) % this.images.length; }
+             }"
+             @keydown.window.arrow-left="prev()"
+             @keydown.window.arrow-right="next()">
+            <div class="relative aspect-[16/10] overflow-hidden rounded-2xl bg-cream shadow-lg ring-1 ring-gray-100">
+                <template x-for="(img, i) in images" :key="i">
+                    <img :src="img.url" :alt="'{{ addslashes($project->translated('title')) }} - ' + (i+1)"
+                         class="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
+                         x-show="active === i"
+                         x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100">
+                </template>
+
+                @if (count($gallery) > 1)
+                    <button type="button" @click="prev()"
+                            class="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white backdrop-blur transition hover:bg-black/70"
+                            aria-label="Sebelumnya">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                    </button>
+                    <button type="button" @click="next()"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white backdrop-blur transition hover:bg-black/70"
+                            aria-label="Selanjutnya">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+
+                    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 rounded-full bg-black/40 px-3 py-1.5 backdrop-blur">
+                        <template x-for="(img, i) in images" :key="'dot-' + i">
+                            <button type="button" @click="active = i"
+                                    class="h-1.5 rounded-full transition-all"
+                                    :class="active === i ? 'bg-white w-6' : 'bg-white/50 w-1.5 hover:bg-white/80'"
+                                    :aria-label="'Slide ' + (i+1)"></button>
+                        </template>
+                    </div>
+                @endif
+            </div>
+
+            @if (count($gallery) > 1)
+                <div class="mt-4 grid grid-cols-4 gap-2 sm:grid-cols-6 sm:gap-3">
+                    <template x-for="(img, i) in images" :key="'thumb-' + i">
+                        <button type="button" @click="active = i"
+                                class="group relative overflow-hidden rounded-lg ring-2 transition-all"
+                                :class="active === i ? 'ring-primary' : 'ring-transparent hover:ring-secondary/50'">
+                            <img :src="img.url" alt="" class="aspect-square w-full object-cover"
+                                 :class="active === i ? '' : 'opacity-70 group-hover:opacity-100'">
+                        </button>
+                    </template>
+                </div>
+            @endif
+        </div>
+    </section>
+@endif
+
 {{-- Content — pulls up under the floating metadata card, no visible seam --}}
-<section class="relative bg-white pt-16 sm:pt-24 pb-12 sm:pb-16">
+<section class="relative bg-white {{ !empty($gallery) ? 'pt-12' : 'pt-16 sm:pt-24' }} pb-12 sm:pb-16">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 fade-up">
         @if ($project->client)
             <div class="mb-6 sm:mb-8 flex flex-wrap items-center gap-2 sm:gap-3">

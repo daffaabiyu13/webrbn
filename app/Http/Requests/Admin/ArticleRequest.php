@@ -26,14 +26,14 @@ class ArticleRequest extends FormRequest
             'short_description_en' => ['nullable', 'string', 'max:1000'],
             'description' => ['nullable', 'string'],
             'description_en' => ['nullable', 'string'],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:' . $limit->maxKb()],
             'url' => ['nullable', 'url', 'max:2048'],
-            'client' => ['nullable', 'string', 'max:255'],
-            'location' => ['nullable', 'string', 'max:255'],
-            'project_size' => ['nullable', 'string', 'max:255'],
             'year' => ['nullable', 'integer', 'between:1900,2100'],
             'position' => ['nullable', 'integer', 'min:0'],
             'is_published' => ['sometimes', 'boolean'],
+            'images' => ['nullable', 'array'],
+            'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:' . $limit->maxKb()],
+            'delete_images' => ['nullable', 'array'],
+            'delete_images.*' => ['integer'],
         ];
     }
 
@@ -43,8 +43,10 @@ class ArticleRequest extends FormRequest
         $human = $limit->human();
 
         return [
-            'image.uploaded' => "Gambar gagal diunggah — kemungkinan lebih besar dari batas server (max {$human}).",
-            'image.max' => "Ukuran gambar terlalu besar. Maksimal {$human}.",
+            'images.*.uploaded' => "Salah satu gambar gagal diunggah — kemungkinan lebih besar dari batas server (max {$human}).",
+            'images.*.max' => "Salah satu gambar terlalu besar. Maksimal {$human}.",
+            'images.*.image' => 'Salah satu file bukan gambar yang valid.',
+            'images.*.mimes' => 'Salah satu gambar harus JPG/PNG/WebP.',
             'url.url' => 'URL harus lengkap, misalnya https://contoh.com/artikel.',
         ];
     }

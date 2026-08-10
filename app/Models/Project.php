@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Project extends Model
 {
@@ -14,7 +15,6 @@ class Project extends Model
         'short_description_en',
         'description',
         'description_en',
-        'image',
         'client',
         'location',
         'project_size',
@@ -47,12 +47,21 @@ class Project extends Model
         return 'slug';
     }
 
+    public function images(): HasMany
+    {
+        return $this->hasMany(ProjectImage::class)->orderBy('position')->orderBy('id');
+    }
+
+    public function primaryImage(): ?ProjectImage
+    {
+        return $this->images->first();
+    }
+
     public function imageUrl(): string
     {
-        if ($this->image) {
-            return str_starts_with($this->image, 'http')
-                ? $this->image
-                : asset('storage/' . $this->image);
+        $primary = $this->primaryImage();
+        if ($primary) {
+            return $primary->url();
         }
 
         return route('placeholder', ['name' => $this->title]);
