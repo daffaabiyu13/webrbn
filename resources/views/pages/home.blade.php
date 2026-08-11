@@ -5,11 +5,13 @@
 
 @section('content')
 
-{{-- SECTION 1: HERO — fills the viewport exactly. The 5rem extra accounts
-     for the -mt-20 bleed under the sticky navbar, so the stat strip lands
-     right at the fold instead of below it. 100dvh handles mobile URL bars. --}}
+{{-- SECTION 1: HERO — fills the viewport exactly. Sticky navbar (h-20)
+     already reserves 80px at the top of the flow; -mt-20 pulls the hero
+     up to occupy that space. Net: hero is exactly one viewport tall, so
+     100dvh (with vh fallback for older browsers) lands the stat strip
+     right at the fold. --}}
 <section class="relative flex flex-col -mt-20 overflow-hidden"
-         style="min-height: calc(100vh + 5rem); min-height: calc(100dvh + 5rem);">
+         style="min-height: 100vh; min-height: 100dvh;">
     @if (!empty($hero['background']))
         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $hero['background'] }}');"></div>
     @else
