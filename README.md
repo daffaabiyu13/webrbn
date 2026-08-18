@@ -25,7 +25,7 @@ URL: `/admin/login`
 **Kredensial default (seeder):**
 
 - Email: `admin@radikabintang.com`
-- Password: `password`
+- Password: ``
 
 Fitur:
 - **Dashboard** — ringkasan jumlah produk, produk unggulan, kategori, dan daftar produk terbaru
