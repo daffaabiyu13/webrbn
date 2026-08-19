@@ -1,0 +1,30 @@
+name: Deploy ke Hostinger
+
+on:
+  push:
+    branches:
+      - claude/stoic-franklin-VT0ru
+
+# Prevent overlap when pushes arrive quickly — the newer run cancels the older
+concurrency:
+  group: deploy-hostinger
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: SSH & Run deploy.sh
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          port: ${{ secrets.HOSTINGER_PORT }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          # Give it a bit of headroom in case migrations take a while
+          command_timeout: 5m
+          script: |
+            cd ~/domains/radikabintang.com/public_html
+            chmod +x deploy.sh
+            ./deploy.sh
